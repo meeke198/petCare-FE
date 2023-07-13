@@ -1,15 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react';
 import "./UserProfile.css"
-import "./assets/vendor/bootstrap/css/bootstrap-grid.min.css"
-import "./assets/vendor/bootstrap-icons/bootstrap-icons.css"
-import "./assets/vendor/boxicons/css/boxicons.min.css"
-import "./assets/vendor/quill/quill.bubble.css"
-import "./assets/vendor/quill/quill.snow.css"
-import "./assets/vendor/remixicon/remixicon.css"
-import "./assets/vendor/simple-datatables/style.css"
+import "../../assets/vendor/bootstrap/css/bootstrap-grid.min.css";
+import "../../assets/vendor/bootstrap-icons/bootstrap-icons.css";
+import "../../assets/vendor/boxicons/css/boxicons.min.css";
+import "../../assets/vendor/quill/quill.bubble.css";
+import "../../assets/vendor/quill/quill.snow.css";
+import "../../assets/vendor/remixicon/remixicon.css";
+import "../../assets/vendor/simple-datatables/style.css";
 import './update.css'
 
-import "./assets/vendor/bootstrap/js/bootstrap.bundle.min"
+import "../../assets/vendor/bootstrap/js/bootstrap.bundle.min";
 import {useDispatch, useSelector} from "react-redux";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../breadcrumb/Breadcrumb";
