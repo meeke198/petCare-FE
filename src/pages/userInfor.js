@@ -2,7 +2,7 @@ import {Link, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../redux/apiRequest";
-import '../assets/css/style.css';
+// import '../assets/css/style.css';
 import {getUserDetail} from "../redux/userRequest";
 
 
