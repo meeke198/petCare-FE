@@ -13,7 +13,7 @@ export const ServicePackageDescription = (props) => {
             >
                 <div className="description">
                     <p className="para-2 mb-3">
-                        {props.content} ///
+                        {props?.content} 
                         Our pet care service provides various forms of care for
                         pets, including feeding, exercise, grooming, and overall
                         well-being. This type of service can be provided in the

@@ -78,7 +78,7 @@ function OrderSummary(props) {
       <div className="added-product-summary mb-30">
         <h5 className="title-25 checkout-title">Order Summary</h5>
         <ul className="added-products">
-          { data.map(element =>
+          { data?.map(element =>
 
           <li className="single-product d-flex justify-content-start" key={element.id}>
             <div className="product-img">

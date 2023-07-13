@@ -25,7 +25,7 @@ const OtherServiceSlide = (props) => {
                         </div>
                     </div>
                     <div className="row home1-services-slider">
-                        {servicePackages && servicePackages.map((element, index) =>
+                        {servicePackages && servicePackages?.map((element, index) =>
                             <div className="services-card1" key={index}>
                                 <div className="icon">
                                     <img src={element.image} alt="" className='package-image ' />

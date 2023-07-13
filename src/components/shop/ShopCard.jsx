@@ -34,7 +34,7 @@ function ShopCard(props) {
                 }
             })
             .then(res => {
-                setProducts(res.data.content)
+                setProducts(res.data?.content)
                 props.setTotalPages(res.data.totalPages)
             })
             .catch(err => {console.log(err)
@@ -66,7 +66,7 @@ function ShopCard(props) {
 
     return (
         <>
-            {products.map((item) => {
+            {products?.map((item) => {
                 const {
                     id,
                     name,
@@ -78,11 +78,11 @@ function ShopCard(props) {
                 return (
                     <div key={id} className="col-lg-4 col-md-4 col-sm-6">
                         <div className="collection-card">
-                            {markDtoResponse.tag === "" ? ("") : (
+                            {markDtoResponse?.tag === null ? ("") : (
                                 <div
-                                    className= {markDtoResponse.tagBadge === "" ? "offer-card" : `offer-card ${markDtoResponse.tagBadge}`}
+                                    className= {markDtoResponse?.tagBadge || `offer-card ${markDtoResponse?.tagBadge}`}
                                 >
-                                    <span>{markDtoResponse.tag}</span>
+                                    <span>{markDtoResponse?.tag}</span>
                                 </div>
                             )}
                             {arrayIdProductFavorite.includes(id) &&

@@ -222,7 +222,7 @@ function ServiceDetails(props) {
                         aria-orientation="vertical"
                     >
                       <Swiper {...slider}>
-                        {images.map(image => (
+                        {images?.map(image => (
                                 <SwiperSlide className='service-image-swiper' key={image.id}>
                                   <button
                                       className={mainImage === image.url ? 'nav-link active' : 'nav-link'}
@@ -235,7 +235,7 @@ function ServiceDetails(props) {
                                       aria-selected="true"
                                       onClick={onChangeImageHandler.bind(null, image.url)}
                                   >
-                                    <img src={image.url} alt="" className='service-image' />
+                                    <img src={image?.url} alt="" className='service-image' />
                                   </button >
                                 </SwiperSlide>
                             )

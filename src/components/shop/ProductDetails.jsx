@@ -59,8 +59,8 @@ function ProductDetails(props) {
     const res = sentRequest(URL_PRODUCT_DETAIL, GET, null, token);
     res.then((data) => {
       setProduct(data);
-      setMainImage(data.image);
-      setImages([...data.imageDetailList, { url: data.image }]);
+      setMainImage(data?.image);
+      setImages([...data?.imageDetailList, { url: data?.image }]);
     });
     setProductCart({
       ...productPriceCount,
@@ -68,7 +68,7 @@ function ProductDetails(props) {
     })
   }, [])
 
-  const finalPrice = product.sale? product.price*(1 - (product.sale/100)): product.price;
+  const finalPrice = product?.sale ? product.price*(1 - (product.sale/100)): product.price;
   const body = {
     userEmail: email,
     type: true,
@@ -86,7 +86,7 @@ function ProductDetails(props) {
       try {
         const url = 'cart';
         dispatch(addItem(body));
-        props.toast.current.show({
+        props.toast?.current.show({
           severity: "success",
           summary: "Success",
           detail: `Add ${product.name} successfully`,
@@ -96,7 +96,7 @@ function ProductDetails(props) {
           navigation("/shop");
         }, 1000);
       } catch (error) {
-        props.toast.current.show({severity: 'error', summary: 'Fail', detail: `Failed to add to cart `, life: 1000});
+        props.toast?.current.show({severity: 'error', summary: 'Fail', detail: `Failed to add to cart `, life: 1000});
         console.error('Error:', error.message);
 
       }
@@ -125,11 +125,11 @@ function ProductDetails(props) {
             aria-orientation="vertical"
           >
             <Swiper {...slider}>
-              {images.map((image, index) => (
+              {images?.map((image, index) => (
                 <SwiperSlide className="service-image-swiper" key={index}>
                   <button
                     className={
-                      mainImage === image.url ? "nav-link active" : "nav-link"
+                      mainImage === image?.url ? "nav-link active" : "nav-link"
                     }
                     id="v-pills-img1-tab"
                     data-bs-toggle="pill"
@@ -140,7 +140,7 @@ function ProductDetails(props) {
                     aria-selected="true"
                     onClick={onChangeImageHandler.bind(null, image.url)}
                   >
-                    <img src={image.url} alt="" className="service-image" />
+                    <img src={image?.url} alt="" className="service-image" />
                   </button>
                 </SwiperSlide>
               ))}

@@ -12,7 +12,7 @@ export const ServiceProcess = (props) => {
                         In this package, we provide you with the following services:
                     </p>
                     <ul>
-                        {props.process.map(service =>
+                        {props.process?.map(service =>
                             <li key={service.id}>
                                 <strong>{service.name}</strong>{'   '}
                                 {service.description}

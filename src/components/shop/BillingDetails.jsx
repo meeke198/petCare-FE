@@ -35,7 +35,7 @@ function BillingDetails(props) {
 
   let items = [];
   let deleteCartDetailIdList = [];
-  cartItems.map(element => {
+  cartItems?.map(element => {
     const totalPrice =  element.price * element.amount;
     const item = {
       itemName: element.name,
