@@ -8,7 +8,7 @@ import Home from "./pages";
 import AboutPage from "./pages/about";
 import LoginPage from "./pages/login";
 import SignUpPage from "./pages/sign-up";
-import CloudinaryUploader from "./components/uploadFile/imageUpload";
+// import CloudinaryUploader from "./components/uploadFile/imageUpload";
 import {useState} from "react";
 import {tokenLoader} from "./utilities/author";
 import CartPage from "./pages/cart";

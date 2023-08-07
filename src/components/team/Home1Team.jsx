@@ -76,7 +76,7 @@ function Home1Team() {
         <div className="row">
           <Swiper {...temSlider} className="swiper team-slider-1">
             <div className="swiper-wrapper">
-              {teamData.map((item) => {
+              {teamData?.map((item) => {
                 return (
                   <SwiperSlide key={item.id} className="swiper-slide">
                     <div className="single-team-card">

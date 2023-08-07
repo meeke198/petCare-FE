@@ -21,7 +21,7 @@ const OrderSlice = createSlice({
         cancelOrder(state, action) {
             const editOrder = action.payload;
             const url = URL_ORDER + '/' + editOrder.id;
-            state.products = state.products.map(order => {
+            state.products = state.products?.map(order => {
                 if (order.id === editOrder.id) {
                     return {
                         ...order,

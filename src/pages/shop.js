@@ -94,7 +94,7 @@ function Shop() {
                     <h5 className="shop-widget-title">Category</h5>
                     <div className="checkbox-container">
 
-                    {category.map((item) => (
+                    {category?.map((item) => (
                       <label className="containerss" key={item.name}>
                         {item.name}
                         <input

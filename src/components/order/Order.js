@@ -75,7 +75,7 @@ export const Order = () => {
                     </Modal>
                 )}
             <div className="col-lg-4">
-                {orders.map((element, index) => (<div className="widget-area" key={element.id}>
+                {orders?.map((element, index) => (<div className="widget-area" key={element.id}>
                     <div className="single-widgets widget_egns_recent_post mb-30 order">
                         <div>
                         </div>
