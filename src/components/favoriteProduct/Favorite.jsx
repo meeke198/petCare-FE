@@ -27,7 +27,7 @@ function ShopCard(props) {
             .then(res => {
                 const arrayProduct = [];
                 const arrayProductId = [];
-                res.data.favoriteProductDtoResponses.forEach(item => {
+                res.data?.favoriteProductDtoResponses.forEach(item => {
                     arrayProduct.push(item.productDtoResponse);
                     arrayProductId.push(item.productDtoResponse.id)
                 })
@@ -49,7 +49,7 @@ function ShopCard(props) {
 
     return (
         <>
-            {products.map((item) => {
+            {products?.map((item) => {
                 const {
                     id,
                     name,

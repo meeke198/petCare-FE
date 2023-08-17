@@ -6,7 +6,7 @@ import { checkAdminRole } from "../utils/roleCheck";
 
 function PrivateRoute({ role }) {
   const currentUser = useSelector(selectUser);
-  console.log("currentUser", currentUser);
+  // console.log("currentUser", currentUser);
   const isAdmin = checkAdminRole(currentUser.role_name[0]);
   if (role && !isAdmin) return <Navigate to="/" />;
   return currentUser ? <Outlet /> : <Navigate to="/admin" />;

@@ -20,7 +20,7 @@ function CartPage() {
     email = isLogin.userDtoResponse.email;
     token = isLogin.token;
   }
-  console.log(token)
+  // console.log(token)
   useEffect(() => {
     const URL = `${URL_CART}/${email}`
         dispatch(deleteAllItems());

@@ -32,9 +32,9 @@ function ProfileSection() {
     const [messPhoneErr, setMessPhoneErr] = useState(false);
 
     useEffect(() => {
-        console.log(userResponse)
+        // console.log(userResponse)
         if (userResponse) {
-            console.log(1);
+            // console.log(1);
             setPhoneUser(userResponse.userDtoResponse.phone);
            axios
                 .get(`${LOGIN_API}/users/${userResponse.userDtoResponse.id}`, {
@@ -49,7 +49,7 @@ function ProfileSection() {
                     throw err;
                 });
         }
-        console.log(2)
+        // console.log(2)
     }, [userResponse]);
     useEffect(()=>{
         if(user){

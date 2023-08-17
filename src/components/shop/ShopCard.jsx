@@ -47,7 +47,7 @@ function ShopCard(props) {
             .get(`${FAVORITE_PRODUCTS_API}`)
             .then(res => {
                 const arrayProductId = [];
-                res.data.favoriteProductDtoResponses.forEach(item => {
+                res.data?.favoriteProductDtoResponses?.forEach(item => {
                     arrayProductId.push(item.productDtoResponse.id)
                 })
                 setArrayIdProductFavorite(arrayProductId);

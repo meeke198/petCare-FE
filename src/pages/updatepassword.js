@@ -48,7 +48,7 @@ function ChangPassword() {
             errors.newPassword = "Required";
         }else if (!REGEX.newPassword.test(form.newPassword)) {
             errors.newPassword = "have at least 8 characters, have uppercase letters, lowercase letters, special characters";
-            console.log("code");
+            // console.log("code");
         }
         if (!form.confirmPassword) {
             errors.confirmPassword = "Required";
@@ -63,7 +63,7 @@ function ChangPassword() {
         password.oldPassword = form.currentPass;
         password.newPassword = form.newPassword;
         password.email = email;
-        console.log(password);
+        // console.log(password);
         await changePassword(password, dispatch, navigate, toast, token);
     }
 

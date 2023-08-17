@@ -46,7 +46,7 @@ export const ServicePackage = () => {
     if(isLogin){
         token = isLogin.token;
     }
-    console.log(isLogin)
+    // console.log(isLogin)
     useEffect(() => {
         let sortedField= '';
         let sortOrder = 'asc';

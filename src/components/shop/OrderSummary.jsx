@@ -7,6 +7,7 @@ import {
   deleteItem,
   firstCallApi
 } from "../../store/cartInventorySlice";
+import "core-js";
 import {useDispatch, useSelector} from "react-redux";
 
 function OrderSummary(props) {

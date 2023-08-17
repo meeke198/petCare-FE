@@ -18,13 +18,23 @@ function LoginPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
-
+    const demoUser = {
+        account: "demouser123",
+        password: "Demouser123$"
+    }
     function handleChangeLogin(event) {
         setForm({
             ...form,
             [event.target.name]: event.target.value
         });
     }
+     function handleLoginDemoUser(demoUser) {
+       setForm({
+         ...form,
+         [form.acount]: demoUser.account,
+         [form.password]: demoUser.password
+       });
+     }
 
     function handleValidateLogin() {
         const errors = {};

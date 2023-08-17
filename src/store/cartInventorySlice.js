@@ -37,7 +37,7 @@ const cartInventorySlice = createSlice({
           },
         deleteItem(state, action) {
             const deleteItem = action.payload;
-            console.log(deleteItem)
+            // console.log(deleteItem)
 
             state.cartTotal = +state.cartTotal - (deleteItem.price * deleteItem.amount);
             state.items = state.items.filter(item => !(item.typeId === deleteItem.typeId && item.type === deleteItem.type));

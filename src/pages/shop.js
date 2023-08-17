@@ -20,7 +20,7 @@ function Shop() {
   if(isLogin){
     token = isLogin.token;
   }
-  console.log(token)
+  // console.log(token)
 
   const CATEGORY_API = process.env.REACT_APP_FETCH_API + `/categorys`;
   useEffect(() => {
@@ -64,7 +64,7 @@ function Shop() {
 
 
 
-  console.log(checkedCategory)
+  // console.log(checkedCategory)
   //Phân trang
   function contentPageNumber() {
     let content = []

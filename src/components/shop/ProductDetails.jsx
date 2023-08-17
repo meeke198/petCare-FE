@@ -1,12 +1,14 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState, useRef } from "react";
 import ProductPriceCount from "./ProductPriceCount";
-import {sentRequest} from "../../pages/ServicePackage";
-import {useDispatch, useSelector} from "react-redux";
-import {addItem} from "../../store/cartInventorySlice";
+import { sentRequest } from "../../pages/ServicePackage";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../../store/cartInventorySlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useMemo } from "react";
-import {GET} from "../../utilities/constantVariable";
+import { GET } from "../../utilities/constantVariable";
+
+
 
 function ProductDetails(props) {
   const { id } = useParams();
@@ -20,7 +22,7 @@ function ProductDetails(props) {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
   let email = "";
-  let token = '';
+  let token = "";
   if (isLogin) {
     email = isLogin.userDtoResponse.email;
     token = isLogin.token;
@@ -33,42 +35,54 @@ function ProductDetails(props) {
     setMainImage(props);
   };
 
-  const onChangeImageHandler = props => {
+  const onChangeImageHandler = (props) => {
     setMainImage(props);
-  }
-
+  };
 
   const slider = useMemo(() => {
-    return (
-        {
-          slidesPerView: "auto",
-          loop: true,
-          speed: 1500,
-          autoplay: {
-            delay: 2000,
-          },
-          navigation: {
-            nextEl: ".next-btn-1",
-            prevEl: ".prev-btn-1",
-          },
-        }
-    )
-  })
+    return {
+      slidesPerView: "auto",
+      loop: true,
+      speed: 1500,
+      autoplay: {
+        delay: 2000,
+      },
+      navigation: {
+        nextEl: ".next-btn-1",
+        prevEl: ".prev-btn-1",
+      },
+    };
+  });
 
   useEffect(() => {
-    const res = sentRequest(URL_PRODUCT_DETAIL, GET, null, token);
-    res.then((data) => {
-      setProduct(data);
-      setMainImage(data?.image);
-      setImages([...data?.imageDetailList, { url: data?.image }]);
-    });
-    setProductCart({
-      ...productPriceCount,
-      'productId': props.productId
-    })
-  }, [])
+    const sendRequestVal = async () => {
+      try {
+        const data = await sentRequest(URL_PRODUCT_DETAIL, GET, null, token);
+       
 
-  const finalPrice = product?.sale ? product.price*(1 - (product.sale/100)): product.price;
+      // data.then((data) => {
+        console.log({data})
+        setProduct(data);
+        setMainImage(data.image);
+        setImages([...data.imageDetailList, { url: data.image }]);
+      // });
+
+        setProductCart({
+          ...productPriceCount,
+          productId: props.productId,
+        });
+      } catch (error) {
+        // Handle the error as needed
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    sendRequestVal();
+  }, []);
+
+  const finalPrice = product?.sale
+    ? product.price * (1 - product.sale / 100)
+    : product.price;
   const body = {
     userEmail: email,
     type: true,
@@ -78,13 +92,13 @@ function ProductDetails(props) {
     name: product.name,
     originalPrice: product.price,
     price: finalPrice,
-    ...productPriceCount
+    ...productPriceCount,
   };
   const handlePostData = async (event) => {
     event.preventDefault();
     if (isLogin) {
       try {
-        const url = 'cart';
+        const url = "cart";
         dispatch(addItem(body));
         props.toast?.current.show({
           severity: "success",
@@ -96,9 +110,13 @@ function ProductDetails(props) {
           navigation("/shop");
         }, 1000);
       } catch (error) {
-        props.toast?.current.show({severity: 'error', summary: 'Fail', detail: `Failed to add to cart `, life: 1000});
-        console.error('Error:', error.message);
-
+        props.toast?.current.show({
+          severity: "error",
+          summary: "Fail",
+          detail: `Failed to add to cart `,
+          life: 1000,
+        });
+        console.error("Error:", error.message);
       }
     } else {
       navigation("/login");
@@ -125,11 +143,13 @@ function ProductDetails(props) {
             aria-orientation="vertical"
           >
             <Swiper {...slider}>
-              {images?.map((image, index) => (
-                <SwiperSlide className="service-image-swiper" key={index}>
+              {images?.map((image) => (
+                <SwiperSlide className="service-image-swiper" key={image?.id}>
                   <button
                     className={
-                      mainImage === image?.url ? "nav-link active" : "nav-link"
+                      mainImage === (image?.url || null)
+                        ? "nav-link active"
+                        : "nav-link"
                     }
                     id="v-pills-img1-tab"
                     data-bs-toggle="pill"
@@ -138,7 +158,9 @@ function ProductDetails(props) {
                     role="tab"
                     aria-controls="v-pills-img1"
                     aria-selected="true"
-                    onClick={onChangeImageHandler.bind(null, image.url)}
+                    onClick={
+                      image ? () => onChangeImageHandler(image?.url) : null
+                    }
                   >
                     <img src={image?.url} alt="" className="service-image" />
                   </button>
@@ -149,18 +171,17 @@ function ProductDetails(props) {
         </div>
         <div className="col-lg-5">
           <div className="shop-details-content">
-            <h3>{product.name}</h3>
-            <ul className="shopuct-review2 d-flex flex-row align-items-center mb-25">
-            </ul>
+            <h3>{product?.name}</h3>
+            <ul className="shopuct-review2 d-flex flex-row align-items-center mb-25"></ul>
             <div className="model-number">
-              <span>Product Code: {product.productCode}</span>
+              <span>Product Code: {product?.productCode}</span>
             </div>
             <div className="price-tag">
               <h4>
-                ${finalPrice} <del>${product.price}</del>
+                ${finalPrice} <del>${product?.price}</del>
               </h4>
             </div>
-            <p>Description : {product.description} </p>
+            <p>Description : {product?.description} </p>
             <div className="shop-quantity d-flex align-items-center justify-content-start mb-20">
               <div className="quantity d-flex align-items-center">
                 <ProductPriceCount
