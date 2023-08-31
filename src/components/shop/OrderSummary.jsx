@@ -15,8 +15,9 @@ function OrderSummary(props) {
   const cartTotal = useSelector((state) => state.cartInventory.cartTotal)
   const cartItems = useSelector((state) => state.cartInventory.items)
   const [alteredAmount, setAlteredAmount] = useState(0);
-  const tax = cartTotal * 0.1;
-  const shippingFee = 1;
+  console.log({cartTotal});
+  const tax = cartTotal * 0.08;
+  const shippingFee = 7.00;
   const total = cartTotal + tax + shippingFee;
   const dispatch = useDispatch();
   const [shouldFetchData, setShouldFetchData] = useState(false);
@@ -79,32 +80,39 @@ function OrderSummary(props) {
       <div className="added-product-summary mb-30">
         <h5 className="title-25 checkout-title">Order Summary</h5>
         <ul className="added-products">
-          { data?.map(element =>
-
-          <li className="single-product d-flex justify-content-start" key={element.id}>
-            <div className="product-img">
-              <img src={element.image} alt="" />
-            </div>
-            <div className="product-info">
-              <h5 className="product-title">
-                <a href="#">{element.name}</a>
-              </h5>
-              <>
-                <button onClick={decrease.bind(null, element)} type="button">
-                  <i className="bi bi-dash"></i>
-                </button>
-                <span style={{ margin: "0 20px", fontFamily: "Cabin" }}>{element.amount}</span>
-                <button onClick={increase.bind(null, element)} type="button">
-                  <i className="bi bi-plus"></i>
-                </button>
-                <span className='product-price'> $ {element.price}</span>
-              </>
-            </div>
-            <div className="delete-btn" onClick={deleteInCartHandler.bind(null, element)}>
-              <i className="bi bi-x-lg" />
-            </div>
-          </li>
-          )}
+          {data?.map((element) => (
+            <li
+              className="single-product d-flex justify-content-start"
+              key={element.id}
+            >
+              <div className="product-img">
+                <img src={element.image} alt="" />
+              </div>
+              <div className="product-info">
+                <h5 className="product-title">
+                  <a href="#">{element.name}</a>
+                </h5>
+                <>
+                  <button onClick={decrease.bind(null, element)} type="button">
+                    <i className="bi bi-dash"></i>
+                  </button>
+                  <span style={{ margin: "0 20px", fontFamily: "Cabin" }}>
+                    {element.amount}
+                  </span>
+                  <button onClick={increase.bind(null, element)} type="button">
+                    <i className="bi bi-plus"></i>
+                  </button>
+                  <span className="product-price"> $ {element.price}</span>
+                </>
+              </div>
+              <div
+                className="delete-btn"
+                onClick={deleteInCartHandler.bind(null, element)}
+              >
+                <i className="bi bi-x-lg" />
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="summery-card cost-summery mb-30">

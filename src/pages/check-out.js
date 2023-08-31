@@ -1,17 +1,23 @@
 import React, {useEffect, useRef, useState} from "react";
 import Breadcrumb from "../components/breadcrumb/Breadcrumb";
+import Layout from "../layout/Layout";
+import {useDispatch, useSelector} from "react-redux";
+import {addItemByOne, decreaseItemByOne, deleteAllItems, deleteItem, firstCallApi} from "../store/cartInventorySlice";
+import {sentRequest} from "./ServicePackage";
 import BillingDetails from "../components/shop/BillingDetails";
+import { GET, URL_CART } from "../utilities/constantVariable";
 import { Toast } from 'primereact/toast';
 import OrderSummary from "../components/shop/OrderSummary";
-import Layout from "../layout/Layout";
+
 
 function CheckOutPage() {
+
   const toast = useRef(null);
   const [alteredAmount, setAlteredAmount] = useState(0);
   const  [total, seTotal] = useState(0);
 
   useEffect(() => {
-
+ 
   }, [alteredAmount])
   return (
     <Layout>

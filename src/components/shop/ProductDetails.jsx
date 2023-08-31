@@ -23,10 +23,11 @@ function ProductDetails(props) {
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
   let email = "";
   let token = "";
+  // console.log(typeof(images));
   if (isLogin) {
     email = isLogin.userDtoResponse.email;
     token = isLogin.token;
-  }
+  }    
   function discoutPrice(price, sale) {
     return price * (1 - sale / 100);
   }
@@ -58,14 +59,20 @@ function ProductDetails(props) {
     const sendRequestVal = async () => {
       try {
         const data = await sentRequest(URL_PRODUCT_DETAIL, GET, null, token);
-       
 
-      // data.then((data) => {
-        console.log({data})
+        // data.then((data) => {
+        console.log({ data })
         setProduct(data);
         setMainImage(data.image);
-        setImages([...data.imageDetailList, { url: data.image }]);
-      // });
+        setImages(
+          ...(data.imageDetailList
+            ? [data.imageDetailList, { url: data.image }]
+            : [{ url: data.image }])
+            
+        );
+        console.log({ images });
+        // setImages([...(data.imageDetailList || []), {url: data.image}]);
+        // });
 
         setProductCart({
           ...productPriceCount,
@@ -94,6 +101,32 @@ function ProductDetails(props) {
     price: finalPrice,
     ...productPriceCount,
   };
+  const imagesList = (images) => {
+     for(const image of images) {
+      return (
+        <SwiperSlide className="service-image-swiper" key={image?.id}>
+           <button
+             className={
+               mainImage === (image?.url || null)
+                 ? "nav-link active"
+                 : "nav-link"
+             }
+             id="v-pills-img1-tab"
+             data-bs-toggle="pill"
+             data-bs-target="#v-pills-img1"
+             type="button"
+             role="tab"
+             aria-controls="v-pills-img1"
+             aria-selected="true"
+             onClick={image ? () => onChangeImageHandler(image?.url) : null}
+           >
+             <img src={image?.url} alt="" className="service-image" />
+           </button>
+         </SwiperSlide>
+      )
+     }
+}
+
   const handlePostData = async (event) => {
     event.preventDefault();
     if (isLogin) {
@@ -143,7 +176,8 @@ function ProductDetails(props) {
             aria-orientation="vertical"
           >
             <Swiper {...slider}>
-              {images?.map((image) => (
+              {imagesList}
+              {/* {images?.map((image) => (
                 <SwiperSlide className="service-image-swiper" key={image?.id}>
                   <button
                     className={
@@ -165,7 +199,7 @@ function ProductDetails(props) {
                     <img src={image?.url} alt="" className="service-image" />
                   </button>
                 </SwiperSlide>
-              ))}
+              ))} */}
             </Swiper>
           </div>
         </div>
