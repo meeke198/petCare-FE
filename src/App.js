@@ -43,7 +43,7 @@ const router = createBrowserRouter([
       {path:'cart', element:<Auth><CartPage/></Auth>},
       {path:'check-out', element:<Auth><CheckOutPage/></Auth>},
       {path:'order', element:<Auth><Order/></Auth>},
-      {path:'contact', element:<Contact/>},
+      // {path:'contact', element:<Contact/>},
       // {path:'profile', element:<Profile/>},
       {path:'updatePassword', element:<ChangPassword/>},
       {path:'favorite-products',element:<FavoriteProduct/>},

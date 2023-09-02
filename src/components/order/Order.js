@@ -124,7 +124,7 @@ export const Order = () => {
                                 </tr>
                                 <tr>
                                     <th>Order's Name: </th>
-                                    <td>{element.fullName? element.fullName: element.userDtoResponse.fullName}</td>
+                                    <td>{element.fullName ? element.fullName: "Guest"}</td>
                                 </tr>
                                 <tr>
                                     <th>Phone Number:</th>

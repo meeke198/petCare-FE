@@ -14,8 +14,8 @@ function CheckOutPage() {
 
   const toast = useRef(null);
   const [alteredAmount, setAlteredAmount] = useState(0);
-  const  [total, seTotal] = useState(0);
-
+  const  [total, setTotal] = useState(0);
+console.log();
   useEffect(() => {
  
   }, [alteredAmount])
@@ -27,10 +27,10 @@ function CheckOutPage() {
         <div className="container">
           <div className="row g-4">
             <div className="col-lg-7">
-              <BillingDetails  toast={toast} onGetTotal={total} />
+              <BillingDetails toast={toast} onGetTotal={total} />
             </div>
             <aside className="col-lg-5">
-              <OrderSummary  onSenTotal={seTotal}  />
+              <OrderSummary onSenTotal={setTotal} getTotal={total} />
             </aside>
           </div>
         </div>

@@ -12,7 +12,7 @@ export default function Home() {
             <Banner1 />
             <VideoBanner1 />
             <Home1Service />
-            <Home1feature />
+            {/* <Home1feature /> */}
             <FeatureCounter />
             <Footer1 />
         </>

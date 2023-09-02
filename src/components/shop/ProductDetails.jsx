@@ -70,9 +70,6 @@ function ProductDetails(props) {
             : [{ url: data.image }])
             
         );
-        console.log({ images });
-        // setImages([...(data.imageDetailList || []), {url: data.image}]);
-        // });
 
         setProductCart({
           ...productPriceCount,

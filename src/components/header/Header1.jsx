@@ -258,7 +258,7 @@ function Header1() {
                           currentRoute === "/sign-up" ? "active" : ""
                         }`}
                       >
-                        sign up
+                        Sign up
                       </p>
                     </Link>
                   </li>
@@ -284,7 +284,7 @@ function Header1() {
                           currentRoute === "/shop" ? "active" : ""
                         }`}
                       >
-                        products
+                        Products
                       </p>
                     </Link>
                   </li>
@@ -313,9 +313,9 @@ function Header1() {
                 </ul>
               </li>
               <li className={currentRoute === "/contact" ? "active" : ""}>
-                <Link to="/contact">
+                {/* <Link to="/contact">
                   <p className="menu-list-navigation">Contact</p>
-                </Link>
+                </Link> */}
               </li>
             </ul>
             <div className="for-mobile-menu d-lg-none d-block">

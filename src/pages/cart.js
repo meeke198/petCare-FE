@@ -20,16 +20,16 @@ function CartPage() {
     email = isLogin.userDtoResponse.email;
     token = isLogin.token;
   }
-  // console.log(token)
+  // console.log(typeof(data))
   useEffect(() => {
     const URL = `${URL_CART}/${email}`
     //     dispatch(deleteAllItems());
       const res = sentRequest(URL, GET, null, token);
       res.then(data => {
-        // dispatch(firstCallApi(data))
-        setData({data})
+        dispatch(firstCallApi(data))
+        // setData({data})
       })
-      console.log({data});
+      // console.log({data});
 
   }, [])
 

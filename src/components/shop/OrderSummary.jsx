@@ -15,7 +15,7 @@ function OrderSummary(props) {
   const cartTotal = useSelector((state) => state.cartInventory.cartTotal)
   const cartItems = useSelector((state) => state.cartInventory.items)
   const [alteredAmount, setAlteredAmount] = useState(0);
-  console.log({cartTotal});
+ 
   const tax = cartTotal * 0.08;
   const shippingFee = 7.00;
   const total = cartTotal + tax + shippingFee;
@@ -31,7 +31,7 @@ function OrderSummary(props) {
   useEffect(()=> {
     const carts = sentRequest(URL, "GET"  );
     carts.then(data => {
-      dispatch(deleteAllItems());
+      // dispatch(deleteAllItems());
       dispatch(firstCallApi(data))
     }).catch(
     )
