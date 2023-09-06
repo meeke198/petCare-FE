@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { UserInfor } from "../../pages/userInfor";
+import Search from "./Search";
 /*---------Using reducer mange the active or inactive menu----------*/
 const initialState = {
   activeMenu: "",
@@ -41,6 +42,9 @@ function Header1() {
   const [user, setUser] = useState({});
   const [avatar, setAvatar] = useState("");
   const [newAvatar, setNewAvatar] = useState("");
+   const [results, setResults] = useState([]);
+   const [searching, setIsSearching] = useState(false);
+
   const handleScroll = () => {
     const { scrollY } = window;
     dispatch({ type: "setScrollY", payload: scrollY });
@@ -376,12 +380,13 @@ function Header1() {
                   </button>
                 </div>
               </form>
+              {/* <Search onSearchResults={setResults} onSearching={setIsSearching}/> */}
             </div>
           </div>
           <div className="nav-right d-flex jsutify-content-end align-items-center">
             <ul>
               <li className="search-btn">
-                <Link to="/http://192.168.4.228:8081/">
+                {/* <Link to="/http://192.168.4.228:8081/">
                   <svg width={15} height={15} viewBox="0 0 15 15">
                     <path
                       d="M428,41.534H30c-16.569,0-30,13.431-30,30v252c0,16.568,13.432,30,30,30h132.1l43.942,52.243
@@ -392,14 +397,16 @@ function Header1() {
 			                                    s6.716-15,15-15h292.291c8.284,0,15,6.716,15,15C390.146,139.258,383.43,145.974,375.146,145.974z"
                     />
                   </svg>
-                </Link>
-                <form className="nav__search-form">
-                  <input type="text" placeholder="Search keyword" />
+                </Link> */}
+                <form className="search-form">
+              
+                  <input className="search-input" type="text" placeholder="Search keyword" width={15} height={15} viewBox="0 0 15 15"/>
                   <button type="submit">
                     <svg width={15} height={15} viewBox="0 0 15 15">
                       <path d="M13.8914 12.3212L11.3164 9.74312C11.1877 9.63999 11.0332 9.56265 10.8787 9.56265H10.4667C11.1619 8.6603 11.5997 7.52593 11.5997 6.26265C11.5997 3.32358 9.1792 0.900146 6.2437 0.900146C3.28245 0.900146 0.887695 3.32358 0.887695 6.26265C0.887695 9.22749 3.28245 11.6251 6.2437 11.6251C7.4797 11.6251 8.6127 11.2126 9.5397 10.4908V10.9291C9.5397 11.0837 9.5912 11.2384 9.71995 11.3673L12.2692 13.9197C12.5267 14.1775 12.9129 14.1775 13.1447 13.9197L13.8657 13.1978C14.1232 12.9658 14.1232 12.5791 13.8914 12.3212ZM6.2437 9.56265C4.41545 9.56265 2.9477 8.09312 2.9477 6.26265C2.9477 4.45796 4.41545 2.96265 6.2437 2.96265C8.0462 2.96265 9.5397 4.45796 9.5397 6.26265C9.5397 8.09312 8.0462 9.56265 6.2437 9.56265Z" />
                     </svg>
                   </button>
+            
                 </form>
               </li>
               <li>

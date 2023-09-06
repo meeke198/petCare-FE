@@ -1,30 +1,43 @@
 import { useState } from "react";
 import axios from "axios"; 
 import { sentRequest } from "../../pages/ServicePackage";
+// import { set } from "core-js/core/dict";
+import "core-js";
 
-const Search = () => {
-   const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
 
+const Search = (props) => {
+const [query, setQuery] = useState("");
+// const [loading, setLoading] = useState(false);
+
+
+// const setResult = props.onSearchResults;
+// const setIsSearching= props.onSearching;
+const handleKeyDown = () => {
+  props.onSearching(true);
+};
 
    const handleSearch = async (e) => {
     e.preventDefault();
 
     try {
-      setLoading(true);
-      const response = await axios.get("http://localhost:8080/api/search", {
+      // setLoading(true);
+      // setIsSearching(true);
+      const response = await axios.get("http://localhost:8080/api/products/search", {
         params: { query },
       });
-      setResults(response.data);
+      console.log({response});
+      props.onSearchResults(response.data);
+
     } catch (err) {
       console.error(err);
-    } finally {
-      setLoading(false);
     }
   }
     return (
-      <form className="mobile-menu-form" onSubmit={handleSearch}>
+      <form
+        className="mobile-menu-form"
+        onKeyDown={handleKeyDown}
+        onSubmit={handleSearch}
+      >
         <div className="input-with-btn d-flex flex-column">
           <input type="text"
            placeholder="Search here..."

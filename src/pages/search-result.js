@@ -11,8 +11,9 @@ function Shop() {
   const [sizePage, setSizePage] = useState(9);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const [category, setCategory] = useState([]);
+  const [products, setProducts] = useState([]);
   const [checkedCategory, setCheckedCategory] = useState([]);
+  console.log({products});
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
   let token = "";
   if (isLogin) {
@@ -20,20 +21,20 @@ function Shop() {
   }
   console.log(token);
 
-  const CATEGORY_API = process.env.REACT_APP_FETCH_API + `/categories`;
+  const PRODUCTS_API = process.env.REACT_APP_FETCH_API + `/products`;
   useEffect(() => {
     axios
-      .get(`${CATEGORY_API}`, {
+      .get(`${PRODUCTS_API}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Truyền t
         },
       })
       .then((res) => {
-        setCategory(res.data.content);
+        setProducts(res.data.content);
       })
       .catch((err) => {});
   }, []);
-console.log({category});
+
   //Cập nhật lại size
   function handleSizeChange(event) {
     setSizePage(event.target.value);
@@ -46,18 +47,18 @@ console.log({category});
     window.scroll(0, 0);
   }
 
-  const checkbokHandler = (event) => {
-    var updatedList = [...checkedCategory];
-    if (event.target.checked) {
-      updatedList = [...checkedCategory, event.target.value];
-    } else {
-      updatedList.splice(checkedCategory.indexOf(event.target.value), 1);
-      setCurrentPage(0);
-    }
-    setCheckedCategory(updatedList);
-  };
+  // const checkbokHandler = (event) => {
+  //   var updatedList = [...checkedCategory];
+  //   if (event.target.checked) {
+  //     updatedList = [...checkedCategory, event.target.value];
+  //   } else {
+  //     updatedList.splice(checkedCategory.indexOf(event.target.value), 1);
+  //     setCurrentPage(0);
+  //   }
+  //   setCheckedCategory(updatedList);
+  // };
 
-  console.log(checkedCategory);
+  // console.log(checkedCategory);
   //Phân trang
   function contentPageNumber() {
     let content = [];
@@ -72,6 +73,7 @@ console.log({category});
     }
     return content;
   }
+  console.log({ products });
 
   return (
     <>
@@ -86,14 +88,14 @@ console.log({category});
                     <div className="check-box-item">
                       <h5 className="shop-widget-title">Category</h5>
                       <div className="checkbox-container">
-                        {category.map((item) => (
+                        {products.map((item) => (
                           <label className="containerss" key={item.name}>
                             {item.name}
                             <input
                               type="checkbox"
                               id={item.id}
                               value={item.id}
-                              onChange={checkbokHandler}
+                              // onChange={checkbokHandler}
                             />
                             <span className="checkmark" />
                           </label>
@@ -154,7 +156,7 @@ console.log({category});
                     sizePages={sizePage}
                     currentPage={currentPage}
                     setTotalPages={setTotalPages}
-                    checkedCategory={checkedCategory}
+                    // checkedCategory={checkedCategory}
                   />
                 </div>
                 <div className="row pt-70">
