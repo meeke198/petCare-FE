@@ -372,15 +372,15 @@ function Header1() {
                   </Link>
                 </li>
               </ul>
-              <form className="mobile-menu-form">
+              {/* <form className="mobile-menu-form">
                 <div className="input-with-btn d-flex flex-column">
                   <input type="text" placeholder="Search here..." />
                   <button className="primary-btn1" type="submit">
                     Search
                   </button>
                 </div>
-              </form>
-              {/* <Search onSearchResults={setResults} onSearching={setIsSearching}/> */}
+              </form> */}
+              <Search/>
             </div>
           </div>
           <div className="nav-right d-flex jsutify-content-end align-items-center">
@@ -398,7 +398,7 @@ function Header1() {
                     />
                   </svg>
                 </Link> */}
-                <form className="search-form">
+                {/* <form className="search-form">
               
                   <input className="search-input" type="text" placeholder="Search keyword" width={15} height={15} viewBox="0 0 15 15"/>
                   <button type="submit">
@@ -407,7 +407,8 @@ function Header1() {
                     </svg>
                   </button>
             
-                </form>
+                </form> */}
+                <Search/>
               </li>
               <li>
                 <a href="/favorite-products">
@@ -435,15 +436,15 @@ function Header1() {
               </li>
               {isLogin ? (
                 newAvatar ? (
-                  <li className="user-profile-has--hover">
+                  <span className="user-profile-has--hover">
                     <img className="user-avatar" src={newAvatar} />
                     <UserInfor />
-                  </li>
+                  </span>
                 ) : (
-                  <li className="user-profile-has--hover">
+                  <span className="user-profile-has--hover">
                     <img className="user-avatar" src={avatar} />
                     <UserInfor />
-                  </li>
+                  </span>
                 )
               ) : (
                 <li>

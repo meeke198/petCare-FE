@@ -14,12 +14,18 @@ function discoutPrice(price, sale) {
 }
 
 function ShopCard(props) {
-  const PRODUCT_API =
+  const CATEGORY_API =
     process.env.REACT_APP_FETCH_API +
     `/products?size=${props.sizePages}&page=${props.currentPage}&categoryIds=${props.checkedCategory}`;
   const [products, setProducts] = useState([]);
   const [shouldRender, setShouldRender] = useState(false);
+  const query = useSelector(state => state.search.query);
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
+
+  const isSearching = useSelector((state) => state.search.isSearching);
+ 
+ console.log({ query });
+ console.log({ isSearching });
   let token = "";
   let userId = 0;
   if (isLogin) {
@@ -27,25 +33,42 @@ function ShopCard(props) {
     userId = isLogin.userDtoResponse.id;
   }
   const FAVORITE_PRODUCTS_API = `http://localhost:8080/api/favorites/user/${userId}`;
-
+  const SEARCHING_API =  process.env.REACT_APP_FETCH_API + `/products/search?query=${query}`
   const [productFavorites, setProductFavorites] = useState([]);
   // setProductFavorites(sentRequest(FAVORITE_PRODUCTS_API,GET,null,token));
   const [arrayIdProductFavorite, setArrayIdProductFavorite] = useState([]);
   useEffect(() => {
-    axios
-      .get(`${PRODUCT_API}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setProducts(res.data.content);
-        props.setTotalPages(res.data.totalPages);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [PRODUCT_API, props, shouldRender, arrayIdProductFavorite.length]);
+    if (isSearching){
+       axios
+         .get(`${SEARCHING_API}`, {
+           headers: {
+             Authorization: `Bearer ${token}`,
+           },
+         })
+         .then((res) => {
+           setProducts(res.data.content);
+           props.setTotalPages(res.data.totalPages);
+         })
+         .catch((err) => {
+           console.log(err);
+         });
+    } else {
+       axios
+         .get(`${CATEGORY_API}`, {
+           headers: {
+             Authorization: `Bearer ${token}`,
+           },
+         })
+         .then((res) => {
+           setProducts(res.data.content);
+           props.setTotalPages(res.data.totalPages);
+         })
+         .catch((err) => {
+           console.log(err);
+         });
+    }
+     
+  }, [CATEGORY_API, props, shouldRender, arrayIdProductFavorite.length, query]);
 
   useEffect(() => {
     axios
