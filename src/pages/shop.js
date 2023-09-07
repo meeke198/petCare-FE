@@ -5,13 +5,20 @@ import ShopCard from "../components/shop/ShopCard";
 import Layout from "../layout/Layout";
 import { useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { searchStart, updateQuery } from "../redux/searchSlice";
 function Shop() {
   const [sizePage, setSizePage] = useState(9);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [category, setCategory] = useState([]);
+  const [isShopAll, setIsShopAll] = useState(false);
+  const query = useSelector((state) => state.search.query);
+
+  const dispatch = useDispatch();
+  const SEARCHING_API =
+    process.env.REACT_APP_FETCH_API + `/products/search?query=${query}`;
+const isSearching = useSelector((state) => state.search.isSearching);
   const [checkedCategory, setCheckedCategory] = useState([]);
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
   let token = "";
@@ -19,21 +26,27 @@ function Shop() {
     token = isLogin.token;
   }
   console.log(token);
+  const handleShopAll = () => {
+    setIsShopAll(true); 
+    dispatch(updateQuery(""));
+    dispatch(searchStart(false));
+  }
 
   const CATEGORY_API = process.env.REACT_APP_FETCH_API + `/categories`;
   useEffect(() => {
-    axios
-      .get(`${CATEGORY_API}`, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Truyền t
-        },
-      })
-      .then((res) => {
-        setCategory(res.data.content);
-      })
-      .catch((err) => {});
-  }, []);
-console.log({category});
+      axios
+        .get(`${CATEGORY_API}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Truyền t
+          },
+        })
+        .then((res) => {
+          setCategory(res.data.content);
+        })
+        .catch((err) => {});   
+  }, [isShopAll]);
+
+console.log({isShopAll});
   //Cập nhật lại size
   function handleSizeChange(event) {
     setSizePage(event.target.value);
@@ -119,7 +132,7 @@ console.log({category});
                 <div className="row mb-50">
                   <div className="col-lg-12">
                     <div className="multiselect-bar">
-                      <h6>shop</h6>
+                      <h6 className="shop-all" onClick={handleShopAll}>Shop all products</h6>
                       <div className="multiselect-area">
                         <div className="single-select">
                           <span>Show</span>

@@ -380,7 +380,7 @@ function Header1() {
                   </button>
                 </div>
               </form> */}
-              <Search/>
+              {/* <Search/> */}
             </div>
           </div>
           <div className="nav-right d-flex jsutify-content-end align-items-center">

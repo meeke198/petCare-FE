@@ -1578,44 +1578,43 @@ header.style-1 {
           }
         }
       }
-       
-        // .nav__search-form{
-        //   position: absolute;
-        //   top: calc(100% + 15px);
-        //   right: -32px;
-        //   width: 300px;
-        //   display: flex;
-        //   align-items: center;
-        //   background-color: var(--title-color1);
-        //   border: 1px solid #000;
-        //   padding: 15px;
-        //   transition: 0.35s;
-        //   opacity: 0;
-        //   visibility: hidden;
-        //   &::after {
-        //     content: "";
-        //     width: 0px;
-        //     height: 0px;
-        //     top: -8px;
-        //     right: 40px;
-        //     position: absolute;
-        //     border-right: 8px solid transparent;
-        //     border-left: 8px solid transparent;
-        //     border-bottom: 8px solid var(--title-color1);
-        //     z-index: -1;
-        //   }
+      .search-btn {
+        padding: 20px 0;
+        cursor: pointer;
+        .nav__search-form {
+          position: absolute;
+          top: calc(100% + 15px);
+          right: -32px;
+          width: 300px;
+          display: flex;
+          align-items: center;
+          background-color: var(--title-color1);
+          border: 1px solid #000;
+          padding: 15px;
+          transition: 0.35s;
+          opacity: 0;
+          visibility: hidden;
+          &::after {
+            content: "";
+            width: 0px;
+            height: 0px;
+            top: -8px;
+            right: 40px;
+            position: absolute;
+            border-right: 8px solid transparent;
+            border-left: 8px solid transparent;
+            border-bottom: 8px solid var(--title-color1);
+            z-index: -1;
+          }
           input {
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: value;
             border: none;
             background: none;
             outline: none;
             width: 100%;
-            padding: 0 20px;
+            padding: 0 6px;
             color: var(--white);
             font-family: var(--font-cabin);
             font-weight: 400;
-            border: 15px;
           }
           button {
             border: none;
@@ -1626,21 +1625,19 @@ header.style-1 {
             height: 20px;
             line-height: 1;
             padding-right: 6px;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
             svg {
               fill: var(--white);
             }
           }
         }
 
-        // &:hover {
-        //   .nav__search-form {
-        //     opacity: 1;
-        //     visibility: visible;
-        //     top: calc(100% + 7px);
-        //   }
-        // }
+        &:hover {
+          .nav__search-form {
+            opacity: 1;
+            visibility: visible;
+            top: calc(100% + 7px);
+          }
+        }
       }
     }
     .mobile-menu-btn {
