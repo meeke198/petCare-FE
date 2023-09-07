@@ -38,11 +38,9 @@ function ShopCard(props) {
   const SEARCHING_API =
     process.env.REACT_APP_FETCH_API + `/products/search?query=${query}`;
   const [productFavorites, setProductFavorites] = useState([]);
-  // setProductFavorites(sentRequest(FAVORITE_PRODUCTS_API,GET,null,token));
   const [arrayIdProductFavorite, setArrayIdProductFavorite] = useState([]);
   useEffect(() => {
     if (isSearching) {
-      // dispatch(updateQuery(""));
       axios
         .get(`${SEARCHING_API}`, {
           headers: {

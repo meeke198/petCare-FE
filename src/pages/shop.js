@@ -13,12 +13,8 @@ function Shop() {
   const [totalPages, setTotalPages] = useState(0);
   const [category, setCategory] = useState([]);
   const [isShopAll, setIsShopAll] = useState(false);
-  const query = useSelector((state) => state.search.query);
 
   const dispatch = useDispatch();
-  const SEARCHING_API =
-    process.env.REACT_APP_FETCH_API + `/products/search?query=${query}`;
-const isSearching = useSelector((state) => state.search.isSearching);
   const [checkedCategory, setCheckedCategory] = useState([]);
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
   let token = "";

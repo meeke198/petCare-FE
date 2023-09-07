@@ -396,8 +396,8 @@ function Header1() {
 			                                    s-6.716,15-15,15H82.854C74.57,213.755,67.854,207.039,67.854,198.755z M375.146,145.974H82.854c-8.284,0-15-6.716-15-15
 			                                    s6.716-15,15-15h292.291c8.284,0,15,6.716,15,15C390.146,139.258,383.43,145.974,375.146,145.974z"
                     />
-                  </svg>
-                </Link> */}
+                  </svg> */}
+                {/* </Link> */}
                 {/* <form className="search-form">
               
                   <input className="search-input" type="text" placeholder="Search keyword" width={15} height={15} viewBox="0 0 15 15"/>
