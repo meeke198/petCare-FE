@@ -15,7 +15,6 @@ function CheckOutPage() {
   const toast = useRef(null);
   const [alteredAmount, setAlteredAmount] = useState(0);
   const  [total, setTotal] = useState(0);
-console.log();
   useEffect(() => {
  
   }, [alteredAmount])

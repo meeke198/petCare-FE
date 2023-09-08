@@ -249,7 +249,6 @@ function ServiceDetails(props) {
               >
                 <Swiper {...slider}>
                   {images?.map((image) => {
-                    // console.log("Image:", image);
                      if (!image) {
                        return null; // Skip rendering for null/undefined images
                      }

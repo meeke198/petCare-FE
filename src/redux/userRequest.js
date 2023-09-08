@@ -32,9 +32,7 @@ export const getUserDetail = async (userId, token, dispatch, navigate) => {
 }
 export const changePassword = async (form, dispatch, navigate, toast, token) => {
     const LOGIN_API = process.env.REACT_APP_FETCH_API;
-    // console.log(0)
     dispatch(editPassStart);
-    // console.log(1)
     try {
         const res = await axios.put(`${LOGIN_API}/users/password`, form, {
             headers: {

@@ -20,17 +20,12 @@ function CartPage() {
     email = isLogin.userDtoResponse.email;
     token = isLogin.token;
   }
-  // console.log(typeof(data))
   useEffect(() => {
     const URL = `${URL_CART}/${email}`
-    //     dispatch(deleteAllItems());
       const res = sentRequest(URL, GET, null, token);
       res.then(data => {
         dispatch(firstCallApi(data))
-        // setData({data})
       })
-      // console.log({data});
-
   }, [])
 
 
@@ -71,7 +66,6 @@ function CartPage() {
       amount: 1,
     };
     dispatch(decreaseItemByOne(body));
-
   }
   return (
     <>
@@ -115,8 +109,10 @@ function CartPage() {
                               <img src={item.image} alt="" />
                             </td>
                             <td data-label="Food Name">
-                              <Link legacyBehavior href="/shop-details">
-                                <a>{item.name}</a>
+                              <Link href="/shop-details">
+                                <>
+                                  <a>{item.name}</a>
+                                </>
                               </Link>
                             </td>
                             <td data-label="Unite Price">
@@ -172,24 +168,19 @@ function CartPage() {
                       <tr>
                         <th>Cart Totals</th>
                         <th />
-                        {/* <th>${cartTotal.toLocaleString()}</th> */}
                         <th>${cartTotal}</th>
                       </tr>
                     </thead>
                   </table>
                   <ul className="cart-btn-group">
                     <li>
-                      <Link legacyBehavior to="/shop">
-                        <a className="primary-btn2 btn-lg">
-                          Continue to shopping
-                        </a>
+                      <Link className="primary-btn2 btn-lg" to="/shop">
+                        Continue to shopping
                       </Link>
                     </li>
                     <li>
-                      <Link legacyBehavior to="/check-out">
-                        <a className="primary-btn3 btn-lg">
-                          Proceed to Checkout
-                        </a>
+                      <Link className="primary-btn3 btn-lg" to="/check-out">
+                            Proceed to Checkout
                       </Link>
                     </li>
                   </ul>

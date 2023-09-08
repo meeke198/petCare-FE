@@ -48,7 +48,6 @@ function ChangPassword() {
             errors.newPassword = "Required";
         }else if (!REGEX.newPassword.test(form.newPassword)) {
             errors.newPassword = "have at least 8 characters, have uppercase letters, lowercase letters, special characters";
-            // console.log("code");
         }
         if (!form.confirmPassword) {
             errors.confirmPassword = "Required";
@@ -63,7 +62,6 @@ function ChangPassword() {
         password.oldPassword = form.currentPass;
         password.newPassword = form.newPassword;
         password.email = email;
-        // console.log(password);
         await changePassword(password, dispatch, navigate, toast, token);
     }
 
@@ -174,20 +172,6 @@ function ChangPassword() {
                                                         </div>
                                                         <p className="error">{errors.confirmPassword}</p>
                                                     </div>
-                                                    {/*<div className="col-12">*/}
-                                                    {/*    <div*/}
-                                                    {/*        className="form-agreement form-inner d-flex justify-content-between flex-wrap">*/}
-                                                    {/*        <div className="form-group">*/}
-                                                    {/*            <input type="checkbox" id="html"/>*/}
-                                                    {/*            <label htmlFor="html">*/}
-                                                    {/*                I agree to the <Link  to="#">Terms &amp; Policy</Link>*/}
-                                                    {/*            </label>*/}
-                                                    {/*        </div>*/}
-                                                    {/*        <Link to="#" className="forgot-pass">*/}
-                                                    {/*            Forgotten Password*/}
-                                                    {/*        </Link>*/}
-                                                    {/*    </div>*/}
-                                                    {/*</div>*/}
                                                 </div>
                                                 <button className="account-btn" type="submit">Change Password</button>
                                             </form>

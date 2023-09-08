@@ -17,7 +17,6 @@ function FavoriteProduct() {
     const [checkedCategory, setCheckedCategory] = useState([]);
 
     const token = useRouteLoaderData('token');
-    // console.log(token);
 
     const CATEGORY_API = process.env.REACT_APP_FETCH_API + `/categorys`;
     useEffect(() => {
@@ -57,9 +56,6 @@ function FavoriteProduct() {
         setCheckedCategory(updatedList);
     };
 
-
-
-    // console.log(checkedCategory)
     //Phân trang
     function contentPageNumber() {
         let content = []

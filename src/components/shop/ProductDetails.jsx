@@ -23,7 +23,6 @@ function ProductDetails(props) {
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
   let email = "";
   let token = "";
-  // console.log(typeof(images));
   if (isLogin) {
     email = isLogin.userDtoResponse.email;
     token = isLogin.token;
@@ -59,9 +58,6 @@ function ProductDetails(props) {
     const sendRequestVal = async () => {
       try {
         const data = await sentRequest(URL_PRODUCT_DETAIL, GET, null, token);
-
-        // data.then((data) => {
-        console.log({ data })
         setProduct(data);
         setMainImage(data.image);
         setImages(
@@ -220,15 +216,15 @@ function ProductDetails(props) {
                   onSendCart={setProductPriceCount}
                 />
               </div>
-              <Link legacyBehavior to="/cart">
+              <Link to="/cart">
                 <button className="primary-btn3" onClick={handlePostData}>
                   Add to cart
                 </button>
               </Link>
             </div>
             <div className="buy-now-btn" onClick={handlePostData}>
-              <Link legacyBehavior to="/cart">
-                <a>Buy Now</a>
+              <Link  to="/cart">
+               Buy Now
               </Link>
             </div>
           </div>

@@ -25,9 +25,6 @@ function ShopCard(props) {
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
 
   const isSearching = useSelector((state) => state.search.isSearching);
-
-  console.log({ query });
-  console.log({ isSearching });
   let token = "";
   let userId = 0;
   if (isLogin) {
@@ -52,7 +49,7 @@ function ShopCard(props) {
           props.setTotalPages(res.data.totalPages);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     } else {
       axios
@@ -66,7 +63,7 @@ function ShopCard(props) {
           props.setTotalPages(res.data.totalPages);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     }
   }, [
@@ -89,7 +86,7 @@ function ShopCard(props) {
         setArrayIdProductFavorite(arrayProductId);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }, [props]);
 
@@ -99,7 +96,6 @@ function ShopCard(props) {
     const body = { userId, productId: props };
     const res = sentRequest(URL_FAVORITE_PRODUCT, POST, body, token);
   };
-  console.log({ products });
   
 
   return (
@@ -137,7 +133,7 @@ function ShopCard(props) {
                 )}
 
                 <div className="collection-img">
-                  <Link legacyBehavior to={`/shop-details/${id}`}>
+                  <Link to={`/shop-details/${id}`}>
                     <img
                       className="hover_image"
                       style={{ width: "200px", height: "200px" }}
@@ -150,8 +146,8 @@ function ShopCard(props) {
                     <div className="plus-icon">
                       <i className="bi bi-plus" />
                     </div>
-                    <Link legacyBehavior to={`/shop-details/${id}`}>
-                      <a>View Details</a>
+                    <Link to={`/shop-details/${id}`}>
+                     View Details
                     </Link>
                   </div>
                   <ul className="cart-icon-list">
@@ -167,7 +163,7 @@ function ShopCard(props) {
                 </div>
                 <div className="collection-content text-center">
                   <h4>
-                    <Link legacyBehavior to={`/shop-details/${id}`}>
+                    <Link to={`/shop-details/${id}`}>
                       {name}
                     </Link>
                   </h4>

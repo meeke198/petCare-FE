@@ -34,7 +34,7 @@ function ShopCard(props) {
                 setArrayIdProductFavorite(arrayProductId)
                 setProducts(arrayProduct);
             })
-            .catch(err => {console.log(err)
+            .catch(err => {console.error(err)
             })
     }, [FAVORITE_API, props, arrayIdProductFavorite.length]);
 
@@ -59,59 +59,67 @@ function ShopCard(props) {
                     markDtoResponse
                 } = item;
                 return (
-                    <div key={id} className="col-lg-4 col-md-4 col-sm-6">
-                        <div className="collection-card">
-                            {markDtoResponse.tag === "" ? ("") : (
-                                <div
-                                    className= {markDtoResponse.tagBadge === "" ? "offer-card" : `offer-card ${markDtoResponse.tagBadge}`}
-                                >
-                                    <span>{markDtoResponse.tag}</span>
-                                </div>
-                            )}
-
-
-                            <div className="collection-img">
-
-                                <Link legacyBehavior to={`/shop-details/${id}`}>
-                                    <img className="hover_image" style={{width:'200px', height: '200px'}} src={image} alt="" />
-                                </Link>
-
-                                <div className="view-dt-btn">
-                                    <div className="plus-icon">
-                                        <i className="bi bi-plus" />
-                                    </div>
-                                    <Link legacyBehavior to={`/shop-details/${id}`}>
-                                        <a>View Details</a>
-                                    </Link>
-                                </div>
-
-                                <ul className="cart-icon-list">
-                                    <li onClick={deleteFavoriteListHandler.bind(null, id)}>
-                                        <a >
-                                            <img
-                                                src="/assets/images/icon/delete.svg"
-                                                alt=""
-                                            />
-                                        </a>
-                                    </li>
-                                </ul>
-
-                            </div>
-                            <div className="collection-content text-center">
-                                <h4>
-                                    <Link legacyBehavior to={`/shop-details/${id}`} >
-                                        {name}
-                                    </Link>
-                                </h4>
-                                <div className="price">
-                                    <h6>${discoutPrice(price, sale)}</h6>
-                                    {sale !==  0 && <del>${price}</del>}
-                                </div>
-                                <div className="review">
-                                </div>
-                            </div>
+                  <div key={id} className="col-lg-4 col-md-4 col-sm-6">
+                    <div className="collection-card">
+                      {markDtoResponse.tag === "" ? (
+                        ""
+                      ) : (
+                        <div
+                          className={
+                            markDtoResponse.tagBadge === ""
+                              ? "offer-card"
+                              : `offer-card ${markDtoResponse.tagBadge}`
+                          }
+                        >
+                          <span>{markDtoResponse.tag}</span>
                         </div>
+                      )}
+
+                      <div className="collection-img">
+                        <Link to={`/shop-details/${id}`}>
+                          <img
+                            className="hover_image"
+                            style={{ width: "200px", height: "200px" }}
+                            src={image}
+                            alt=""
+                          />
+                        </Link>
+
+                        <div className="view-dt-btn">
+                          <div className="plus-icon">
+                            <i className="bi bi-plus" />
+                          </div>
+                          <Link to={`/shop-details/${id}`}>View Details
+                          </Link>
+                        </div>
+
+                        <ul className="cart-icon-list">
+                          <li
+                            onClick={deleteFavoriteListHandler.bind(null, id)}
+                          >
+                            <a>
+                              <img
+                                src="/assets/images/icon/delete.svg"
+                                alt=""
+                              />
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="collection-content text-center">
+                        <h4>
+                          <Link to={`/shop-details/${id}`}>
+                            {name}
+                          </Link>
+                        </h4>
+                        <div className="price">
+                          <h6>${discoutPrice(price, sale)}</h6>
+                          {sale !== 0 && <del>${price}</del>}
+                        </div>
+                        <div className="review"></div>
+                      </div>
                     </div>
+                  </div>
                 );
             })}
         </>

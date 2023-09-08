@@ -21,7 +21,6 @@ function Shop() {
   if (isLogin) {
     token = isLogin.token;
   }
-  console.log(token);
   const handleShopAll = () => {
     setIsShopAll(true); 
     dispatch(updateQuery(""));
@@ -42,7 +41,6 @@ function Shop() {
         .catch((err) => {});   
   }, [isShopAll]);
 
-console.log({isShopAll});
   //Cập nhật lại size
   function handleSizeChange(event) {
     setSizePage(event.target.value);
@@ -65,14 +63,12 @@ console.log({isShopAll});
     }
     setCheckedCategory(updatedList);
   };
-
-  console.log(checkedCategory);
   //Phân trang
   function contentPageNumber() {
     let content = [];
     for (let i = 0; i < totalPages; i++) {
       content.push(
-        <li className={`page-item ${currentPage === i ? "active" : ""}`}>
+        <li key={i} className={`page-item ${currentPage === i ? "active" : ""}`}>
           <Link className="page-link" onClick={() => changePageNumber(i)}>
             {i + 1}
           </Link>
@@ -96,7 +92,7 @@ console.log({isShopAll});
                       <h5 className="shop-widget-title">Category</h5>
                       <div className="checkbox-container">
                         {category.map((item) => (
-                          <label className="containerss" key={item.name}>
+                          <label className="containerss" key={item.id}>
                             {item.name}
                             <input
                               type="checkbox"

@@ -108,19 +108,16 @@ export const Order = () => {
                       element.orderDetailDtoResponses.map((item) => (
                         <div className="widget-cnt mb-25" key={item.id}>
                           <div className="wi">
-                            <Link legacyBehavior href="/blog-details">
-                              <a>
-                                <img
-                                  src={item.image}
-                                  alt="image"
-                                  className="order-image"
-                                />
-                              </a>
+                            <Link href="/blog-details">
+                                  <img
+                                    src={item.image}
+                                    alt="image"
+                                    className="order-image"/>
                             </Link>
                           </div>
                           <div className="wc">
-                            <Link legacyBehavior href="/blog-grid">
-                              <a> x {item.quantity}</a>
+                            <Link href="/blog-grid">
+                             x {item.quantity}
                             </Link>
                             <div className="order-detail-content">
                               <h6 className="order-detail-content--name">

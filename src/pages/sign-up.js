@@ -82,13 +82,11 @@ function SignUpPage() {
             errors.email = "Required";
         } else if (!REGEX.email.test(form.email)) {
             errors.email = "Invalid email address";
-            // console.log("code");
         }
         if (!form.password) {
             errors.password = "Required";
         } else if (!REGEX.password.test(form.password)) {
             errors.password = "have at least 8 characters, have uppercase letters, lowercase letters, special characters";
-            // console.log("code");
         }
         if (!form.userName) {
             errors.userName = "Required";
@@ -110,15 +108,12 @@ function SignUpPage() {
     const handleBlurSignup = async (e) => {
         // await setUserName(form.userName);
         if (e.target.name === 'userName') {
-            // console.log(1)
             await setUserName(form.userName)
         }
         if (e.target.name === 'email') {
-            // console.log(2)
             await setEmail(form.email)
         }
         if (e.target.name === 'phone') {
-            // console.log(3)
             await setPhone(form.phone)
         }
     }
@@ -132,7 +127,6 @@ function SignUpPage() {
             phone: phone,
             roles
         }
-        // console.log(data)
         await signUpUser(data, dispatch, navigate, toast);
     }
     useEffect(()=>{
@@ -141,7 +135,6 @@ function SignUpPage() {
                 .catch(err => {
                     setMessErrName(err.response.data)
                 })
-        // console.log(1)
     },[userName,LOGIN_API])
 
     useEffect(() => {

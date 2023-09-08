@@ -67,17 +67,7 @@ export const Footer1 = () => {
                     : "book-btn"
                 }
               >
-                {/* <Link to="/contact">
-                  <p
-                    className={
-                      currentRouter === "/index2"
-                        ? "primary-btn2"
-                        : "primary-btn1"
-                    }
-                  >
-                    Book Now
-                  </p>
-                </Link> */}
+            
               </div>
             </div>
           </div>

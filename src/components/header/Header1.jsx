@@ -55,22 +55,17 @@ function Header1() {
 
   useEffect(() => {
     if (isLogin && !edit) {
-      console.log(1);
       setUser(isLogin.userDtoResponse);
       setAvatar(isLogin.userDtoResponse.avatar);
       setNewAvatar("");
-      console.log(2);
     }
   }, [isLogin]);
   useEffect(() => {
     if (edit != "") {
-      console.log(3);
       setNewAvatar(edit);
       setAvatar("");
-      console.log(4);
     }
   }, [edit]);
-  console.log(newAvatar);
   return (
     <>
       <div className="top-bar">
@@ -147,11 +142,8 @@ function Header1() {
           >
             <div className="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
               <div className="mobile-logo-wrap">
-                <Link to="/">
-                  <p>
-                    {" "}
+                <Link>
                     <img alt="image" src="/assets/images/header1-logo.svg" />
-                  </p>
                 </Link>
               </div>
               <div className="menu-close-btn">

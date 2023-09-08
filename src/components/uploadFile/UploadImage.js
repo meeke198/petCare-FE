@@ -14,7 +14,6 @@ const UploadImage = (props) => {
     };
 
     const handleUploadButtonClick = (e) => {
-        // console.log('2');
         e.preventDefault();
         if (fileImage) {
             const data = new FormData();
@@ -27,10 +26,9 @@ const UploadImage = (props) => {
             axios
                 .post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, data)
                 .then(res => {
-                    // console.log('image upload: ',res.data.secure_url)
                     props.setNewAvatar(res.data.secure_url);
                 })
-                .catch(err => console.log(err))
+                .catch(err => console.error(err))
         }
     };
 

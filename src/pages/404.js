@@ -30,11 +30,13 @@ function ErrorPage() {
                   iaculis vitae nulla. Morbi mattis nec mi ac mollis.{" "}
                 </p>
                 <div className="error-btn">
-                  <Link legacyBehavior href="/">
-                    <a className="primary-btn1">
-                      <img src="/assets/images/icon/home-icon.svg" alt="" /> Back
-                      to home
-                    </a>
+                  <Link href="/">
+                    <>
+                      <a className="primary-btn1">
+                        <img src="/assets/images/icon/home-icon.svg" alt="" />{" "}
+                        Back to home
+                      </a>
+                    </>
                   </Link>
                 </div>
               </div>

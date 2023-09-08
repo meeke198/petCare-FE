@@ -45,8 +45,6 @@ function LoginPage() {
         event.preventDefault();
         setShowPassword(!showPassword);
     }
-
-    console.log(form)
     return (
       <>
         <div className="card flex justify-content-center gap-2">

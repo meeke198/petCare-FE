@@ -13,14 +13,11 @@ function Shop() {
   const [totalPages, setTotalPages] = useState(0);
   const [products, setProducts] = useState([]);
   const [checkedCategory, setCheckedCategory] = useState([]);
-  console.log({products});
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
   let token = "";
   if (isLogin) {
     token = isLogin.token;
   }
-  console.log(token);
-
   const PRODUCTS_API = process.env.REACT_APP_FETCH_API + `/products`;
   useEffect(() => {
     axios
@@ -47,18 +44,6 @@ function Shop() {
     window.scroll(0, 0);
   }
 
-  // const checkbokHandler = (event) => {
-  //   var updatedList = [...checkedCategory];
-  //   if (event.target.checked) {
-  //     updatedList = [...checkedCategory, event.target.value];
-  //   } else {
-  //     updatedList.splice(checkedCategory.indexOf(event.target.value), 1);
-  //     setCurrentPage(0);
-  //   }
-  //   setCheckedCategory(updatedList);
-  // };
-
-  // console.log(checkedCategory);
   //Phân trang
   function contentPageNumber() {
     let content = [];
@@ -73,7 +58,6 @@ function Shop() {
     }
     return content;
   }
-  console.log({ products });
 
   return (
     <>
@@ -156,7 +140,6 @@ function Shop() {
                     sizePages={sizePage}
                     currentPage={currentPage}
                     setTotalPages={setTotalPages}
-                    // checkedCategory={checkedCategory}
                   />
                 </div>
                 <div className="row pt-70">
