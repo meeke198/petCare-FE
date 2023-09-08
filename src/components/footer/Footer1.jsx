@@ -67,7 +67,7 @@ export const Footer1 = () => {
                     : "book-btn"
                 }
               >
-                <Link to="/contact">
+                {/* <Link to="/contact">
                   <p
                     className={
                       currentRouter === "/index2"
@@ -77,7 +77,7 @@ export const Footer1 = () => {
                   >
                     Book Now
                   </p>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
@@ -115,10 +115,10 @@ export const Footer1 = () => {
         <div className="row border-top">
           <div className="col-lg-6">
             <div className="copyright-area">
-              <p>
+              {/* <p>
                 © 2023 Scooby is Proudly Powered by{" "}
                 <a href="https://www.egenslab.com/"> Egens Lab.</a>
-              </p>
+              </p> */}
             </div>
           </div>
           <div className="col-lg-6 d-flex justify-content-lg-end justify-content-center">

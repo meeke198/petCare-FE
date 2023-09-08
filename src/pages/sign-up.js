@@ -11,7 +11,7 @@ import {Formik} from "formik";
 import {signUpUser} from "../redux/apiRequest";
 import {useDispatch} from "react-redux";
 import axios from "axios";
-
+import { loginUser } from "../redux/apiRequest";
 
 function SignUpPage() {
     const LOGIN_API = process.env.REACT_APP_FETCH_API;
@@ -61,6 +61,13 @@ function SignUpPage() {
         }
         roles.push(owner);
     }
+ const handleLoginDemoUser = () => {
+   const demoUser = {
+     account: "demouser123",
+     password: "Demouser123$",
+   };
+   loginUser(demoUser, dispatch, navigate, toast);
+ };
 
     function handleChangeSignup(event) {
         setForm({
@@ -165,182 +172,249 @@ function SignUpPage() {
     }
 
     return (
-        <>
-            <div className="card flex justify-content-center gap-2">
-                <Toast ref={toast}/>
-            </div>
-            <Layout>
-                <Breadcrumb pageName="Sign-Up" pageTitle="Sign-Up"/>
-                <div className="signup-section pt-120 pb-120">
-                    <div className="container">
-                        <div className="row d-flex justify-content-center">
-                            <div className="col-xl-6 col-lg-8 col-md-10">
-                                <div
-                                    className="form-wrapper wow fadeInUp"
-                                    data-wow-duration="1.5s"
-                                    data-wow-delay=".2s"
-                                >
-                                    <div className="form-title">
-                                        <h3>Sign Up</h3>
-                                        <p>
-                                            Do you already have an account?{" "}
-                                            <Link to="/login">
-                                                Log in here
-                                            </Link>
-                                        </p>
-                                    </div>
-                                    <Formik
-                                        initialValues={form}
-                                        validate={handleValidateSignup}
-                                        onSubmit={handleSubmit}
-                                    >
-                                        {({errors, handleSubmit}) => (
-                                            <form className="w-100" onSubmit={handleSubmit}>
-                                                <div className="row">
-                                                    <div className="col-md-6">
-                                                        <div className={`form-inner ${
-                                                            errors.userName ? "custom-input-error" : ""
-                                                        }`}>
-                                                            <label>User Name *</label>
-                                                            <input type="text"
-                                                                   placeholder="Enter Your User Name"
-                                                                   name="userName"
-                                                                   value={form.userName || ""}
-                                                                   onChange={handleChangeSignup}
-                                                                   onBlur={handleBlurSignup}
-
-                                                            />
-                                                            <p className="error">{errors.userName}</p>
-                                                            {messErrName &&
-                                                                <p className="error">this User Name already exists</p>}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6">
-                                                        <div className="form-inner">
-                                                            <label>Full Name *</label>
-                                                            <input type="text"
-                                                                   placeholder="Enter Full Name"
-                                                                   name="fullName"
-                                                                   value={form.fullName || ""}
-                                                                   onChange={handleChangeSignup}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-12">
-                                                        <div className={`form-inner ${
-                                                            errors.email ? "custom-input-error" : ""
-                                                        }`}>
-                                                            <label>Enter Your Email *</label>
-                                                            <input type="email"
-                                                                   placeholder="Enter Your Email"
-                                                                   name="email"
-                                                                   value={form.email || ""}
-                                                                   onChange={handleChangeSignup}
-                                                                   onBlur={handleBlurSignup}
-                                                            />
-                                                            <p className="error">{errors.email}</p>
-                                                            {messEmailErr &&
-                                                                <p className="error">this Email already exists</p>}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-12">
-                                                        <div className={`form-inner ${
-                                                            errors.phone ? "custom-input-error" : ""
-                                                        }`}>
-                                                            <label>Enter Your Phone Number *</label>
-                                                            <input type="text"
-                                                                   placeholder="Enter Your Phone Number"
-                                                                   name="phone"
-                                                                   value={form.phone || ""}
-                                                                   onChange={handleChangeSignup}
-                                                                   onBlur={handleBlurSignup}
-                                                            />
-                                                            <p className="error">{errors.phone}</p>
-                                                            {messPhoneErr &&
-                                                                <p className="error">this Phone already exists</p>}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-12">
-                                                        <div className={`form-inner ${
-                                                            errors.password ? "custom-input-error" : ""
-                                                        }`}>
-                                                            <label>Password *</label>
-                                                            <input
-                                                                type={showPassword ? 'text' : 'password'}
-                                                                name="password"
-                                                                id="password"
-                                                                placeholder="Enter Your Password"
-                                                                value={form.password || ""}
-                                                                onChange={handleChangeSignup}
-                                                            />
-                                                            {
-                                                                showPassword?<i className="bi bi-eye-fill" id="togglePassword1"
-                                                                                onClick={handleShowPass}
-                                                                />:<i className="bi bi-eye-slash" id="togglePassword1"
-                                                                      onClick={handleShowPass}
-                                                                />
-                                                            }
-                                                        </div>
-                                                        <p className="error">{errors.password}</p>
-                                                    </div>
-                                                    <div className="col-md-12">
-                                                        <div className={`form-inner ${
-                                                            errors.confirmPassword ? "custom-input-error" : ""
-                                                        }`}>
-                                                            <label>Confirm Password *</label>
-                                                            <input
-                                                                type={showConfirmPassword ? 'text' : 'password'}
-                                                                name="confirmPassword"
-                                                                id="confirmpassword"
-                                                                placeholder="Enter Your Password"
-                                                                value={form.confirmPassword || ""}
-                                                                onChange={handleChangeSignup}
-                                                            />
-                                                            {
-                                                                showConfirmPassword?<i className="bi bi-eye-fill" id="togglePassword"
-                                                                                onClick={handleShowConfirmPass}
-                                                                />:<i className="bi bi-eye-slash" id="togglePassword"
-                                                                      onClick={handleShowConfirmPass}
-                                                                />
-                                                            }
-                                                        </div>
-                                                        <p className="error">{errors.confirmPassword}</p>
-                                                    </div>
-                                                    <div className="col-md-12">
-                                                        <div
-                                                            className="form-agreement form-inner d-flex justify-content-between flex-wrap">
-                                                            <div className="form-group" onClick={checkBoxCusHandler}>
-                                                                <input defaultChecked="checked" type="checkbox"
-                                                                       id="customer" value="customer"/>
-                                                                <p className="sign-up-checkbox">{isCheckedCus &&
-                                                                    <p className="sign-up-checkbox--checked"></p>}</p>
-                                                                <label htmlFor="customer">Customer</label>
-                                                            </div>
-                                                            <div className="form-group"
-                                                                 onClick={checkBoxHandOwnHandler}>
-                                                                <input type="checkbox" id="owner" value="owner"/>
-                                                                <p className="sign-up-checkbox">{isCheckedOwn &&
-                                                                    <p className="sign-up-checkbox--checked"></p>}</p>
-                                                                <div className="form-group">
-                                                                    <input type="checkbox" id="owner" value="owner"/>
-                                                                    <label htmlFor="owner">Owner</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <button className="account-btn" type="submit">Create Account
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        )}
-                                    </Formik>
-                                </div>
-                            </div>
-                        </div>
+      <>
+        <div className="card flex justify-content-center gap-2">
+          <Toast ref={toast} />
+        </div>
+        <Layout>
+          <Breadcrumb pageName="Sign-Up" pageTitle="Sign-Up" />
+          <div className="signup-section pt-120 pb-120">
+            <div className="container">
+              <div className="row d-flex justify-content-center">
+                <div className="col-xl-6 col-lg-8 col-md-10">
+                  <div
+                    className="form-wrapper wow fadeInUp"
+                    data-wow-duration="1.5s"
+                    data-wow-delay=".2s"
+                  >
+                    <div className="form-title">
+                      <h3>Sign Up</h3>
+                      <p>
+                        Do you already have an account?{" "}
+                        <Link to="/login">Log in here</Link>
+                      </p>
                     </div>
+                    <Formik
+                      initialValues={form}
+                      validate={handleValidateSignup}
+                      onSubmit={handleSubmit}
+                    >
+                      {({ errors, handleSubmit }) => (
+                        <form className="w-100" onSubmit={handleSubmit}>
+                          <div className="row">
+                            <div className="col-md-6">
+                              <div
+                                className={`form-inner ${
+                                  errors.userName ? "custom-input-error" : ""
+                                }`}
+                              >
+                                <label>User Name *</label>
+                                <input
+                                  type="text"
+                                  placeholder="Enter Your User Name"
+                                  name="userName"
+                                  value={form.userName || ""}
+                                  onChange={handleChangeSignup}
+                                  onBlur={handleBlurSignup}
+                                />
+                                <p className="error">{errors.userName}</p>
+                                {messErrName && (
+                                  <p className="error">
+                                    this User Name already exists
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="form-inner">
+                                <label>Full Name *</label>
+                                <input
+                                  type="text"
+                                  placeholder="Enter Full Name"
+                                  name="fullName"
+                                  value={form.fullName || ""}
+                                  onChange={handleChangeSignup}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-md-12">
+                              <div
+                                className={`form-inner ${
+                                  errors.email ? "custom-input-error" : ""
+                                }`}
+                              >
+                                <label>Enter Your Email *</label>
+                                <input
+                                  type="email"
+                                  placeholder="Enter Your Email"
+                                  name="email"
+                                  value={form.email || ""}
+                                  onChange={handleChangeSignup}
+                                  onBlur={handleBlurSignup}
+                                />
+                                <p className="error">{errors.email}</p>
+                                {messEmailErr && (
+                                  <p className="error">
+                                    this Email already exists
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <div className="col-md-12">
+                              <div
+                                className={`form-inner ${
+                                  errors.phone ? "custom-input-error" : ""
+                                }`}
+                              >
+                                <label>Enter Your Phone Number *</label>
+                                <input
+                                  type="text"
+                                  placeholder="Enter Your Phone Number"
+                                  name="phone"
+                                  value={form.phone || ""}
+                                  onChange={handleChangeSignup}
+                                  onBlur={handleBlurSignup}
+                                />
+                                <p className="error">{errors.phone}</p>
+                                {messPhoneErr && (
+                                  <p className="error">
+                                    this Phone already exists
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <div className="col-md-12">
+                              <div
+                                className={`form-inner ${
+                                  errors.password ? "custom-input-error" : ""
+                                }`}
+                              >
+                                <label>Password *</label>
+                                <input
+                                  type={showPassword ? "text" : "password"}
+                                  name="password"
+                                  id="password"
+                                  placeholder="Enter Your Password"
+                                  value={form.password || ""}
+                                  onChange={handleChangeSignup}
+                                />
+                                {showPassword ? (
+                                  <i
+                                    className="bi bi-eye-fill"
+                                    id="togglePassword1"
+                                    onClick={handleShowPass}
+                                  />
+                                ) : (
+                                  <i
+                                    className="bi bi-eye-slash"
+                                    id="togglePassword1"
+                                    onClick={handleShowPass}
+                                  />
+                                )}
+                              </div>
+                              <p className="error">{errors.password}</p>
+                            </div>
+                            <div className="col-md-12">
+                              <div
+                                className={`form-inner ${
+                                  errors.confirmPassword
+                                    ? "custom-input-error"
+                                    : ""
+                                }`}
+                              >
+                                <label>Confirm Password *</label>
+                                <input
+                                  type={
+                                    showConfirmPassword ? "text" : "password"
+                                  }
+                                  name="confirmPassword"
+                                  id="confirmpassword"
+                                  placeholder="Enter Your Password"
+                                  value={form.confirmPassword || ""}
+                                  onChange={handleChangeSignup}
+                                />
+                                {showConfirmPassword ? (
+                                  <i
+                                    className="bi bi-eye-fill"
+                                    id="togglePassword"
+                                    onClick={handleShowConfirmPass}
+                                  />
+                                ) : (
+                                  <i
+                                    className="bi bi-eye-slash"
+                                    id="togglePassword"
+                                    onClick={handleShowConfirmPass}
+                                  />
+                                )}
+                              </div>
+                              <p className="error">{errors.confirmPassword}</p>
+                            </div>
+                            <div className="col-md-12">
+                              <div className="form-agreement form-inner d-flex justify-content-between flex-wrap">
+                                <div
+                                  className="form-group"
+                                  onClick={checkBoxCusHandler}
+                                >
+                                  <input
+                                    defaultChecked="checked"
+                                    type="checkbox"
+                                    id="customer"
+                                    value="customer"
+                                  />
+                                  <p className="sign-up-checkbox">
+                                    {isCheckedCus && (
+                                      <p className="sign-up-checkbox--checked"></p>
+                                    )}
+                                  </p>
+                                  <label htmlFor="customer">Customer</label>
+                                </div>
+                                <div
+                                  className="form-group"
+                                  onClick={checkBoxHandOwnHandler}
+                                >
+                                  <input
+                                    type="checkbox"
+                                    id="owner"
+                                    value="owner"
+                                  />
+                                  <p className="sign-up-checkbox">
+                                    {isCheckedOwn && (
+                                      <p className="sign-up-checkbox--checked"></p>
+                                    )}
+                                  </p>
+                                  <div className="form-group">
+                                    <input
+                                      type="checkbox"
+                                      id="owner"
+                                      value="owner"
+                                    />
+                                    <label htmlFor="owner">Owner</label>
+                                  </div>
+                                </div>
+                              </div>
+                              <button className="account-btn" type="submit">
+                                Create Account
+                              </button>
+                              <br />
+                              <span
+                                className="account-btn"
+                                style={{ width: "50%", margin: "0 auto" }}
+                                onClick={() => handleLoginDemoUser()}
+                              >
+                                Login with Demo User
+                              </span>
+                            </div>
+                          </div>
+                        </form>
+                      )}
+                    </Formik>
+                  </div>
                 </div>
-            </Layout>
-        </>
+              </div>
+            </div>
+          </div>
+        </Layout>
+      </>
     );
 }
 

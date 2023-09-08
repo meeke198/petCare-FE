@@ -1,8 +1,8 @@
+import Search from "./Search";
 import { Link, useLocation } from "react-router-dom";
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { UserInfor } from "../../pages/userInfor";
-import Search from "./Search";
+import { UserInfo } from "../../pages/userInfo";
 /*---------Using reducer mange the active or inactive menu----------*/
 const initialState = {
   activeMenu: "",
@@ -42,9 +42,6 @@ function Header1() {
   const [user, setUser] = useState({});
   const [avatar, setAvatar] = useState("");
   const [newAvatar, setNewAvatar] = useState("");
-   const [results, setResults] = useState([]);
-   const [searching, setIsSearching] = useState(false);
-
   const handleScroll = () => {
     const { scrollY } = window;
     dispatch({ type: "setScrollY", payload: scrollY });
@@ -58,22 +55,22 @@ function Header1() {
 
   useEffect(() => {
     if (isLogin && !edit) {
-      // console.log(1);
+      console.log(1);
       setUser(isLogin.userDtoResponse);
       setAvatar(isLogin.userDtoResponse.avatar);
       setNewAvatar("");
-      // console.log(2);
+      console.log(2);
     }
   }, [isLogin]);
   useEffect(() => {
     if (edit != "") {
-      // console.log(3);
+      console.log(3);
       setNewAvatar(edit);
       setAvatar("");
-      // console.log(4);
+      console.log(4);
     }
   }, [edit]);
-  // console.log(newAvatar);
+  console.log(newAvatar);
   return (
     <>
       <div className="top-bar">
@@ -108,7 +105,7 @@ function Header1() {
                 <p>
                   Opening Hours
                   <br />
-                  <span>Mon - Sat 9.00 - 19.00</span>
+                  <span>Mon - Sat 9.00 - 18.00</span>
                 </p>
               </div>
               <div className="contact-number">
@@ -172,11 +169,6 @@ function Header1() {
                   <p className="menu-list-navigation">Home</p>
                 </Link>
               </li>
-              <li className={currentRoute === "/about" ? "active" : ""}>
-                <a href="/about">
-                  <p className="menu-list-navigation">About</p>
-                </a>
-              </li>
               <li className="menu-item-has-children">
                 <p className="menu-list-navigation-has-children">SERVICES</p>
                 <i
@@ -220,106 +212,11 @@ function Header1() {
                   </li>
                 </ul>
               </li>
-              <li className="menu-item-has-children">
-                <p className="menu-list-navigation-has-children">PAGES</p>
-                <i
-                  className="bi bi-plus dropdown-icon"
-                  onClick={() => dispatch({ type: "pages" })}
-                />
-                <ul
-                  className={
-                    state.activeMenu === "pages"
-                      ? "sub-menu  d-block"
-                      : "sub-menu d-xl-block d-none"
-                  }
-                >
-                  <li>
-                    <Link to="/order">
-                      <p
-                        className={`menu-item-children ${
-                          currentRoute === "/pricing-plan" ? "active" : ""
-                        }`}
-                      >
-                        Your order
-                      </p>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/login">
-                      <p
-                        className={`menu-item-children ${
-                          currentRoute === "/login" ? "active" : ""
-                        }`}
-                      >
-                        Login
-                      </p>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/sign-up">
-                      <p
-                        className={`menu-item-children ${
-                          currentRoute === "/sign-up" ? "active" : ""
-                        }`}
-                      >
-                        Sign up
-                      </p>
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className="menu-item-has-children">
-                <p className="menu-list-navigation-has-children">SHOPPING</p>
-                <i
-                  className="bi bi-plus dropdown-icon"
-                  onClick={() => dispatch({ type: "shop" })}
-                />
-                <ul
-                  className={
-                    state.activeMenu === "shop"
-                      ? "sub-menu  d-block"
-                      : "sub-menu d-xl-block d-none"
-                  }
-                >
-                  <li>
-                    <Link to="/shop">
-                      <p
-                        className={`menu-item-children ${
-                          currentRoute === "/shop" ? "active" : ""
-                        }`}
-                      >
-                        Products
-                      </p>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/cart">
-                      <p
-                        className={`menu-item-children ${
-                          currentRoute === "/cart" ? "active" : ""
-                        }`}
-                      >
-                        Cart
-                      </p>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/check-out">
-                      <p
-                        className={`menu-item-children ${
-                          currentRoute === "/check-out" ? "active" : ""
-                        }`}
-                      >
-                        Check Out
-                      </p>
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className={currentRoute === "/contact" ? "active" : ""}>
-                {/* <Link to="/contact">
-                  <p className="menu-list-navigation">Contact</p>
-                </Link> */}
+             
+              <li>
+                <Link to="/shop">
+                  <p className="menu-list-navigation">PRODUCTS</p>
+                </Link>
               </li>
             </ul>
             <div className="for-mobile-menu d-lg-none d-block">
@@ -372,43 +269,20 @@ function Header1() {
                   </Link>
                 </li>
               </ul>
-              {/* <form className="mobile-menu-form">
+              <form className="mobile-menu-form">
                 <div className="input-with-btn d-flex flex-column">
                   <input type="text" placeholder="Search here..." />
                   <button className="primary-btn1" type="submit">
                     Search
                   </button>
                 </div>
-              </form> */}
-              {/* <Search/> */}
+              </form>
             </div>
           </div>
           <div className="nav-right d-flex jsutify-content-end align-items-center">
             <ul>
               <li className="search-btn">
-                {/* <Link to="/http://192.168.4.228:8081/">
-                  <svg width={15} height={15} viewBox="0 0 15 15">
-                    <path
-                      d="M428,41.534H30c-16.569,0-30,13.431-30,30v252c0,16.568,13.432,30,30,30h132.1l43.942,52.243
-			                                    c5.7,6.777,14.103,10.69,22.959,10.69c8.856,0,17.258-3.912,22.959-10.69l43.942-52.243H428c16.568,0,30-13.432,30-30v-252
-			                                    C458,54.965,444.568,41.534,428,41.534z M323.916,281.534H82.854c-8.284,0-15-6.716-15-15s6.716-15,15-15h241.062
-			                                    c8.284,0,15,6.716,15,15S332.2,281.534,323.916,281.534z M67.854,198.755c0-8.284,6.716-15,15-15h185.103c8.284,0,15,6.716,15,15
-			                                    s-6.716,15-15,15H82.854C74.57,213.755,67.854,207.039,67.854,198.755z M375.146,145.974H82.854c-8.284,0-15-6.716-15-15
-			                                    s6.716-15,15-15h292.291c8.284,0,15,6.716,15,15C390.146,139.258,383.43,145.974,375.146,145.974z"
-                    />
-                  </svg> */}
-                {/* </Link> */}
-                {/* <form className="search-form">
-              
-                  <input className="search-input" type="text" placeholder="Search keyword" width={15} height={15} viewBox="0 0 15 15"/>
-                  <button type="submit">
-                    <svg width={15} height={15} viewBox="0 0 15 15">
-                      <path d="M13.8914 12.3212L11.3164 9.74312C11.1877 9.63999 11.0332 9.56265 10.8787 9.56265H10.4667C11.1619 8.6603 11.5997 7.52593 11.5997 6.26265C11.5997 3.32358 9.1792 0.900146 6.2437 0.900146C3.28245 0.900146 0.887695 3.32358 0.887695 6.26265C0.887695 9.22749 3.28245 11.6251 6.2437 11.6251C7.4797 11.6251 8.6127 11.2126 9.5397 10.4908V10.9291C9.5397 11.0837 9.5912 11.2384 9.71995 11.3673L12.2692 13.9197C12.5267 14.1775 12.9129 14.1775 13.1447 13.9197L13.8657 13.1978C14.1232 12.9658 14.1232 12.5791 13.8914 12.3212ZM6.2437 9.56265C4.41545 9.56265 2.9477 8.09312 2.9477 6.26265C2.9477 4.45796 4.41545 2.96265 6.2437 2.96265C8.0462 2.96265 9.5397 4.45796 9.5397 6.26265C9.5397 8.09312 8.0462 9.56265 6.2437 9.56265Z" />
-                    </svg>
-                  </button>
-            
-                </form> */}
-                <Search/>
+                  <Search/>
               </li>
               <li>
                 <a href="/favorite-products">
@@ -436,15 +310,15 @@ function Header1() {
               </li>
               {isLogin ? (
                 newAvatar ? (
-                  <span className="user-profile-has--hover">
+                  <li className="user-profile-has--hover">
                     <img className="user-avatar" src={newAvatar} />
-                    <UserInfor />
-                  </span>
+                    <UserInfo />
+                  </li>
                 ) : (
-                  <span className="user-profile-has--hover">
+                  <li className="user-profile-has--hover">
                     <img className="user-avatar" src={avatar} />
-                    <UserInfor />
-                  </span>
+                    <UserInfo />
+                  </li>
                 )
               ) : (
                 <li>

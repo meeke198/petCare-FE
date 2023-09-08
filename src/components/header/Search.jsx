@@ -10,15 +10,6 @@ import {searchStart, updateQuery} from "../../redux/searchSlice"
 const Search = (props) => {
   const [searchInput, setSearchInput] = useState()
   const dispatch = useDispatch();
-const query = useSelector(state => state.search.query);
-const isSearching = useSelector(state => state.search.isSearching);
-console.log({ searchInput });
-console.log({ query });
-console.log({ isSearching });
-
-
-// const setResult = props.onSearchResults;
-// const setIsSearching= props.onSearching;
 const handleSubmit = (e) => {
   e.preventDefault();
   dispatch(searchStart(true));
