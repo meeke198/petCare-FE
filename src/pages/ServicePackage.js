@@ -9,7 +9,9 @@ import {useSelector} from "react-redux";
 
 const fetchData = async (packageName, pageSize, currentPage, sortedField = "", sortOrder, token = "") => {
 
-    const URL = `http://localhost:8080/api/package-details/search/${packageName}?size=${pageSize}&page=${currentPage}&sort=${sortedField}${sortOrder === "asc" ? ",asc" : ",desc"}`;
+    const URL = process.env.REACT_APP_FETCH_API + `/package-details/search/${packageName}?size=${pageSize}&page=${currentPage}&sort=${sortedField}${
+      sortOrder === "asc" ? ",asc" : ",desc"
+    }`;
 
     const headers = {
         'Content-Type': 'application/json',

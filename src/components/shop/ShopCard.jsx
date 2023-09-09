@@ -31,7 +31,9 @@ function ShopCard(props) {
     token = isLogin.token;
     userId = isLogin.userDtoResponse.id;
   }
-  const FAVORITE_PRODUCTS_API = `http://localhost:8080/api/favorites/user/${userId}`;
+  const FAVORITE_PRODUCTS_API =
+    process.env.REACT_APP_FETCH_API +
+    `/favorites/user/${userId}`;
   const SEARCHING_API =
     process.env.REACT_APP_FETCH_API + `/products/search?query=${query}`;
   const [productFavorites, setProductFavorites] = useState([]);
