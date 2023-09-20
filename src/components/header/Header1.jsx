@@ -143,7 +143,7 @@ function Header1() {
             <div className="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
               <div className="mobile-logo-wrap">
                 <Link>
-                    <img alt="image" src="/assets/images/header1-logo.svg" />
+                  <img alt="image" src="/assets/images/header1-logo.svg" />
                 </Link>
               </div>
               <div className="menu-close-btn">
@@ -175,10 +175,10 @@ function Header1() {
                   }
                 >
                   <li>
-                    <a href="/service-packages/search/Day care">
+                    <a href="/service-packages/search/1">
                       <p
                         className={`menu-item-children ${
-                          currentRoute === "/service-packages/search/Day Care"
+                          currentRoute === "/service-packages/search/1"
                             ? "active"
                             : ""
                         }`}
@@ -188,23 +188,50 @@ function Header1() {
                     </a>
                   </li>
                   <li>
-                    <a href="/service-packages/search/Walking Service">
-                      <p className="menu-item-children">Walking Service</p>
+                    <a href="/service-packages/search/2">
+                      <p
+                        className={`menu-item-children ${
+                          currentRoute ===
+                          "/service-packages/search/2"
+                            ? "active"
+                            : ""
+                        }`}
+                      >
+                        Walking Service
+                      </p>
                     </a>
                   </li>
                   <li>
-                    <a href="/service-packages/search/Pet's Sap">
-                      <p className="menu-item-children">'Pet's Sapa'</p>
+                    <a href="/service-packages/search/3">
+                      <p
+                        className={`menu-item-children ${
+                          currentRoute ===
+                          "/service-packages/search/3"
+                            ? "active"
+                            : ""
+                        }`}
+                      >
+                        Pet's Sapa
+                      </p>
                     </a>
                   </li>
                   <li>
-                    <a href="/service-packages/search/Training Program">
-                      <p className="menu-item-children">Training Program</p>
+                    <a href="/service-packages/search/4">
+                      <p
+                        className={`menu-item-children ${
+                          currentRoute ===
+                          "/service-packages/search/4"
+                            ? "active"
+                            : ""
+                        }`}
+                      >
+                        Training Program
+                      </p>
                     </a>
                   </li>
                 </ul>
               </li>
-             
+
               <li>
                 <Link to="/shop">
                   <p className="menu-list-navigation">PRODUCTS</p>
@@ -274,7 +301,7 @@ function Header1() {
           <div className="nav-right d-flex jsutify-content-end align-items-center">
             <ul>
               <li className="search-btn">
-                  <Search/>
+                <Search />
               </li>
               <li>
                 <a href="/favorite-products">

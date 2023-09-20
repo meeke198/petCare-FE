@@ -9,10 +9,8 @@ import {useSelector} from "react-redux";
 
 const fetchData = async (packageName, pageSize, currentPage, sortedField = "", sortOrder, token = "") => {
 
-    const URL = process.env.REACT_APP_FETCH_API + `/package-details/search/${packageName}?size=${pageSize}&page=${currentPage}&sort=${sortedField}${
-      sortOrder === "asc" ? ",asc" : ",desc"
-    }`;
-
+    const URL = `http://localhost:8080/api/package-details/search/${packageName}?size=${pageSize}&page=${currentPage}&sort=${sortedField}${sortOrder === "asc" ? ",asc" : ",desc"}`;
+    
     const headers = {
         'Content-Type': 'application/json',
     };
@@ -28,14 +26,18 @@ const fetchData = async (packageName, pageSize, currentPage, sortedField = "", s
 
     const response = await fetch(URL, options);
     const data = await response.json();
+     console.log({ data });
     const servicePackages = data.content;
+
+    console.log({servicePackages});
     const totalPages = data.totalPages;
     return { servicePackages, totalPages };
 };
 
 
 export const ServicePackage = () => {
-    const  packageName = useParams();
+    const packageDefault = useParams()
+    const [packageName, setPackageName] = useState(packageDefault);
     const [isSortedByPrice, setIsSortedByPrice] = useState(false);
     const [isSortedByCenterName, setIsSortedByCenterName] = useState(false);
     const [isSortedAsDesc, setSortedAsDesc] = useState(false);
@@ -43,12 +45,17 @@ export const ServicePackage = () => {
     const pageSize = 9;
     const [data, setData] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
+    // const [packageName, setPackageName] = useState("");
+
     const isLogin = useSelector((state) => state.auth.login?.currentUser);
+    // const PACKAGE_URL = process.env.REACT_APP_FETCH_API + `/packages/${packageId}`;
     let token = "";
     if(isLogin){
         token = isLogin.token;
     }
     useEffect(() => {
+        // const name = fetch(PACKAGE_URL);
+        // setPackageName(name);
         let sortedField= '';
         let sortOrder = 'asc';
         if(isSortedAsDesc){
@@ -64,6 +71,8 @@ export const ServicePackage = () => {
             const { servicePackages, totalPages } = await fetchData(packageName.name, pageSize, currentPage, sortedField,sortOrder, token);
             setData(servicePackages);
             setTotalPages(totalPages);
+            setPackageName(servicePackages[0]?.packageName);
+            // console.log({ servicePackages });
         };
         fetchPage();
 
@@ -85,6 +94,9 @@ export const ServicePackage = () => {
     const sortAsDescHandler = () => {
         setSortedAsDesc(!isSortedAsDesc)
     }
+// console.log({ packageDefault });
+// console.log({ packageName });
+
     return (
         <Layout>
             <BreadcrumbService/>

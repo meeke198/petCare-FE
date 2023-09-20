@@ -70,6 +70,7 @@ function ServiceDetails(props) {
     request
       .then((data) => {
         setServicePackage(data);
+        console.log({data});
         setMainImage(data.image);
         if (
           data.packageDetailReviewDtoResponses &&
@@ -223,9 +224,10 @@ function ServiceDetails(props) {
     res.then();
     window.location.reload(true);
   };
+  console.log({servicePackage});
   return (
     <Layout>
-      <Breadcrumb pageName="Packages Details" pageTitle={servicePackage.name} />
+      <Breadcrumb pageName="Packages Details" pageTitle={servicePackage[0]?.name} />
       <Toast ref={toast} />
       <div className="services-details-area pt-120 mb-120">
         <div className="container">

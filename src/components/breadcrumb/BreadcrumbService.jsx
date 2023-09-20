@@ -3,6 +3,7 @@ import React from "react";
 
 function BreadcrumbService({ pageName = "Page Name", pageTitle = "Page Title" }) {
     const packages = useParams();
+    console.log({ packages });
     return (
         <div className="inner-page-banner">
             <div className="breadcrumb-vec-btm">
@@ -16,7 +17,8 @@ function BreadcrumbService({ pageName = "Page Name", pageTitle = "Page Title" })
                 <div className="row justify-content-center align-items-center text-center">
                     <div className="col-lg-6 align-items-center">
                         <div className="banner-content">
-                            <h1>{packages.name}</h1>
+                            {/* <h1>{packages.name}</h1> */}
+                            <h1></h1>
                             <nav aria-label="breadcrumb">
                                 <ol className="breadcrumb">
                                     <li className="breadcrumb-item">
@@ -24,9 +26,9 @@ function BreadcrumbService({ pageName = "Page Name", pageTitle = "Page Title" })
                                             Home
                                         </Link>
                                     </li>
-                                    <li className="breadcrumb-item active" aria-current="page">
+                                    {/* <li className="breadcrumb-item active" aria-current="page">
                                         {pageName}
-                                    </li>
+                                    </li> */}
                                 </ol>
                             </nav>
                         </div>
