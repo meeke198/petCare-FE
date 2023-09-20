@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import { searchStart, updateQuery } from "../../redux/searchSlice";
+import { useSelector} from "react-redux";
+// import { searchStart, updateQuery } from "../../redux/searchSlice";
 import { sentRequest } from "../../pages/ServicePackage";
 import {
-  GET,
+  // GET,
   POST,
   URL_FAVORITE_PRODUCT,
 } from "../../utilities/constantVariable";
@@ -15,11 +15,7 @@ function discoutPrice(price, sale) {
 }
 
 function ShopCard(props) {
-  const dispatch = useDispatch();
-  const CATEGORY_API =
-    process.env.REACT_APP_FETCH_API +
-    `/products?size=${props.sizePages}&page=${props.currentPage}&categoryIds=${props.checkedCategory}`;
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(props.products);
   const [shouldRender, setShouldRender] = useState(false);
   const query = useSelector((state) => state.search.query);
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
@@ -31,15 +27,10 @@ function ShopCard(props) {
     token = isLogin.token;
     userId = isLogin.userDtoResponse.id;
   }
-  const FAVORITE_PRODUCTS_API =
-    process.env.REACT_APP_FETCH_API +
-    `/favorites/user/${userId}`;
   const SEARCHING_API =
     process.env.REACT_APP_FETCH_API + `/products/search?query=${query}`;
-  const [productFavorites, setProductFavorites] = useState([]);
   const [arrayIdProductFavorite, setArrayIdProductFavorite] = useState([]);
   useEffect(() => {
-    if (isSearching) {
       axios
         .get(`${SEARCHING_API}`, {
           headers: {
@@ -53,53 +44,22 @@ function ShopCard(props) {
         .catch((err) => {
           console.error(err);
         });
-    } else {
-      axios
-        .get(`${CATEGORY_API}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          setProducts(res.data.content);
-          props.setTotalPages(res.data.totalPages);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
   }, [
-    CATEGORY_API,
     props,
     shouldRender,
-    arrayIdProductFavorite.length,
+    // arrayIdProductFavorite.length,
     query,
     isSearching,
   ]);
 
-  useEffect(() => {
-    axios
-      .get(`${FAVORITE_PRODUCTS_API}`)
-      .then((res) => {
-        const arrayProductId = [];
-        res.data?.favoriteProductDtoResponses?.forEach((item) => {
-          arrayProductId.push(item.productDtoResponse.id);
-        });
-        setArrayIdProductFavorite(arrayProductId);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [props]);
-
-  const addInFavoriteListHandler = (props) => {
-    setArrayIdProductFavorite((prevState) => [...prevState, props]);
-    setShouldRender(!shouldRender);
-    const body = { userId, productId: props };
-    const res = sentRequest(URL_FAVORITE_PRODUCT, POST, body, token);
-  };
+  // const addInFavoriteListHandler = (props) => {
+  //   setArrayIdProductFavorite((prevState) => [...prevState, props]);
+  //   setShouldRender(!shouldRender);
+  //   const body = { userId, productId: props };
+    // const res = sentRequest(URL_FAVORITE_PRODUCT, POST, body, token);
+  // };
   
-
+// console.log({ products });
   return (
     <>
       {products ? (
@@ -153,14 +113,14 @@ function ShopCard(props) {
                     </Link>
                   </div>
                   <ul className="cart-icon-list">
-                    <li onClick={addInFavoriteListHandler.bind(null, id)}>
+                    {/* <li onClick={addInFavoriteListHandler.bind(null, id)}>
                       <a>
                         <img
                           src="/assets/images/icon/Icon-favorites3.svg"
                           alt=""
                         />
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 <div className="collection-content text-center">

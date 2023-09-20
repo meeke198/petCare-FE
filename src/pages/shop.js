@@ -6,40 +6,50 @@ import Layout from "../layout/Layout";
 import { useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { searchStart, updateQuery } from "../redux/searchSlice";
+import { searchStart, updateQuery, updateReload } from "../redux/searchSlice";
 function Shop() {
   const [sizePage, setSizePage] = useState(9);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const [category, setCategory] = useState([]);
+  // const [category, setCategory] = useState([]);
   const [isShopAll, setIsShopAll] = useState(false);
-
+  const [products, setProducts] = useState([]);
+  const query = useSelector((state) => state.search.query);
+  const reload = useSelector((state) => state.search.reload);
   const dispatch = useDispatch();
-  const [checkedCategory, setCheckedCategory] = useState([]);
+  // const [checkedCategory, setCheckedCategory] = useState([]);
+    const isSearching = useSelector((state) => state.search.isSearching);
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
   let token = "";
   if (isLogin) {
     token = isLogin.token;
+  }
+  if(reload){
+    dispatch(updateQuery(""));
+    dispatch(updateReload(false));
   }
   const handleShopAll = () => {
     setIsShopAll(true); 
     dispatch(updateQuery(""));
     dispatch(searchStart(false));
   }
-
-  const CATEGORY_API = process.env.REACT_APP_FETCH_API + `/categories`;
+ const SEARCHING_API = process.env.REACT_APP_FETCH_API + `/products/search?query=${query}`;
+  
   useEffect(() => {
-      axios
-        .get(`${CATEGORY_API}`, {
-          headers: {
-            Authorization: `Bearer ${token}`, // Truyền t
-          },
-        })
-        .then((res) => {
-          setCategory(res.data.content);
-        })
-        .catch((err) => {});   
-  }, [isShopAll]);
+     axios
+       .get(`${SEARCHING_API}`, {
+         headers: {
+           Authorization: `Bearer ${token}`,
+         },
+       })
+       .then((res) => {
+         setProducts(res.data.content);
+         setTotalPages(res.data.totalPages);
+       })
+       .catch((err) => {
+         console.error(err);
+       });
+  }, [isShopAll, query, isSearching]);
 
   //Cập nhật lại size
   function handleSizeChange(event) {
@@ -53,16 +63,6 @@ function Shop() {
     window.scroll(0, 0);
   }
 
-  const checkbokHandler = (event) => {
-    var updatedList = [...checkedCategory];
-    if (event.target.checked) {
-      updatedList = [...checkedCategory, event.target.value];
-    } else {
-      updatedList.splice(checkedCategory.indexOf(event.target.value), 1);
-      setCurrentPage(0);
-    }
-    setCheckedCategory(updatedList);
-  };
   //Phân trang
   function contentPageNumber() {
     let content = [];
@@ -77,7 +77,6 @@ function Shop() {
     }
     return content;
   }
-
   return (
     <>
       <Layout>
@@ -86,26 +85,7 @@ function Shop() {
           <div className="container">
             <div className="row">
               <div className="col-lg-3">
-                <div className="shop-sidebar">
-                  <div className="shop-widget">
-                    <div className="check-box-item">
-                      <h5 className="shop-widget-title">Category</h5>
-                      <div className="checkbox-container">
-                        {category.map((item) => (
-                          <label className="containerss" key={item.id}>
-                            {item.name}
-                            <input
-                              type="checkbox"
-                              id={item.id}
-                              value={item.id}
-                              onChange={checkbokHandler}
-                            />
-                            <span className="checkmark" />
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+               <div className="shop-sidebar">
                   <div className="shop-widget">
                     <div className="item">
                       <h5 className="shop-widget-title">Brands included</h5>
@@ -159,7 +139,7 @@ function Shop() {
                     sizePages={sizePage}
                     currentPage={currentPage}
                     setTotalPages={setTotalPages}
-                    checkedCategory={checkedCategory}
+                    products={products}
                   />
                 </div>
                 <div className="row pt-70">

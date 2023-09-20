@@ -1,7 +1,8 @@
 import Search from "./Search";
 import { Link, useLocation } from "react-router-dom";
 import React, { useEffect, useReducer, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateReload } from "../../redux/searchSlice";
 import { UserInfo } from "../../pages/userInfo";
 /*---------Using reducer mange the active or inactive menu----------*/
 const initialState = {
@@ -35,6 +36,7 @@ function reducer(state, action) {
 function Header1() {
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
   // const [isEdit, setIsEdit]= useState(false);
+  const dispatchAction = useDispatch();
   const edit = useSelector((state) => state.user.image.isUpdated);
   const currentRoute = useLocation().pathname;
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -52,7 +54,9 @@ function Header1() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+const handleReload = () => {
+  dispatchAction(updateReload(true));
+}
   useEffect(() => {
     if (isLogin && !edit) {
       setUser(isLogin.userDtoResponse);
@@ -66,6 +70,7 @@ function Header1() {
       setAvatar("");
     }
   }, [edit]);
+
   return (
     <>
       <div className="top-bar">
@@ -191,8 +196,7 @@ function Header1() {
                     <a href="/service-packages/search/2">
                       <p
                         className={`menu-item-children ${
-                          currentRoute ===
-                          "/service-packages/search/2"
+                          currentRoute === "/service-packages/search/2"
                             ? "active"
                             : ""
                         }`}
@@ -205,8 +209,7 @@ function Header1() {
                     <a href="/service-packages/search/3">
                       <p
                         className={`menu-item-children ${
-                          currentRoute ===
-                          "/service-packages/search/3"
+                          currentRoute === "/service-packages/search/3"
                             ? "active"
                             : ""
                         }`}
@@ -219,8 +222,7 @@ function Header1() {
                     <a href="/service-packages/search/4">
                       <p
                         className={`menu-item-children ${
-                          currentRoute ===
-                          "/service-packages/search/4"
+                          currentRoute === "/service-packages/search/4"
                             ? "active"
                             : ""
                         }`}
@@ -234,7 +236,9 @@ function Header1() {
 
               <li>
                 <Link to="/shop">
-                  <p className="menu-list-navigation">PRODUCTS</p>
+                  <p onClick={handleReload} className="menu-list-navigation">
+                    PRODUCTS
+                  </p>
                 </Link>
               </li>
             </ul>

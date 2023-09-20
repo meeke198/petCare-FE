@@ -4,6 +4,7 @@ const searchSlice = createSlice({
   initialState: {
     isSearching: false,
     query: "",
+    reload: false
   },
   reducers: {
     searchStart: (state, action) => {
@@ -12,8 +13,11 @@ const searchSlice = createSlice({
     updateQuery: (state, action) => {
       state.query = action.payload;
     },
+    updateReload: (state, action) => {
+      state.reload = action.payload;
+    },
   },
 });
-export const { searchStart, updateQuery } = searchSlice.actions;
+export const { searchStart, updateQuery, updateReload } = searchSlice.actions;
 
 export default searchSlice.reducer;

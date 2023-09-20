@@ -90,8 +90,8 @@ function CartPage() {
                         </tr>
                       </thead>
                       <tbody>
-                        {data.map((item) => (
-                          <tr key={item.id}>
+                        {data?.map((item) => (
+                          <tr key={item?.id}>
                             <td data-label="Delete">
                               <div
                                 className="delete-icon"
@@ -110,13 +110,11 @@ function CartPage() {
                             </td>
                             <td data-label="Food Name">
                               <Link href="/shop-details">
-                                <>
-                                  <a>{item.name}</a>
-                                </>
+                                {item?.name}
                               </Link>
                             </td>
                             <td data-label="Unite Price">
-                              <del>${item.originalPrice}</del>
+                              <del>${item?.originalPrice}</del>
                             </td>
                             <td data-label="Discount Price">${item.price}</td>
                             <td data-label="Quantity">
@@ -135,7 +133,7 @@ function CartPage() {
                                         fontFamily: "Cabin",
                                       }}
                                     >
-                                      {item.amount}
+                                      {item?.amount}
                                     </span>
                                     <button
                                       onClick={increase.bind(null, item)}
@@ -148,7 +146,7 @@ function CartPage() {
                               </div>
                             </td>
                             <td data-label="Subtotal">
-                              ${(item.price * item.amount).toLocaleString()}
+                              ${(item?.price * item?.amount).toLocaleString()}
                             </td>
                           </tr>
                         ))}

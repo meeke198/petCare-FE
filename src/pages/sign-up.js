@@ -63,7 +63,7 @@ function SignUpPage() {
     }
  const handleLoginDemoUser = () => {
    const demoUser = {
-     account: "demouser123",
+     account: "demouser123@gmail.com",
      password: "Demouser123$",
    };
    loginUser(demoUser, dispatch, navigate, toast);

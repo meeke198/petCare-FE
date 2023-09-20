@@ -10915,6 +10915,16 @@ footer.style2 .social-area ul li:hover a i {
   justify-content: space-between;
   padding: 8px 10px 8px 25px;
 }
+.shop-all:hover{
+left: 0;
+right: 0;
+opacity: 1;
+transform: scale(1.1); /* Expand the button by 10% */
+color: #e74c3c;
+cursor: pointer;
+transition: all 0.3s ease;
+
+}
 @media (max-width: 576px) {
   .multiselect-bar {
     flex-wrap: wrap;
