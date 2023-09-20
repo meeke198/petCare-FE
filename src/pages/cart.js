@@ -91,7 +91,7 @@ function CartPage() {
                       </thead>
                       <tbody>
                         {data?.map((item) => (
-                          <tr key={item?.id}>
+                          <tr key={item?.name}>
                             <td data-label="Delete">
                               <div
                                 className="delete-icon"

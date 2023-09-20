@@ -308,7 +308,7 @@ const handleReload = () => {
                 <Search />
               </li>
               <li>
-                <a href="/favorite-products">
+                <a href="/shop">
                   <svg
                     width={14}
                     height={13}

@@ -92,13 +92,6 @@ function ServiceDetails(props) {
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
-        //       setReviews(data.packageDetailReviewDtoResponses.content)
-        //       setServices(data.serviceDtoResponses.content);
-        //       const serviceImages = data.serviceDtoResponses.content.flatMap(service => service.serviceImages)
-        //       setImages(serviceImages);
-        //       setDescriptions(data.description)
-        //       const img = {id: 100, url: data.image}
-        //       setImages(prevState => [...prevState, img]);
       });
     setIsLoaded(true);
   }, [isLoaded]);
@@ -428,7 +421,7 @@ function ServiceDetails(props) {
                           <div className="review-list-area">
                             <ul className="review-list">
                               {reviews.map((review) => (
-                                <li key={review.key}>
+                                <li key={review.id}>
                                   <div className="single-review d-flex  flex-md-nowrap flex-wrap">
                                     <div className="review-image">
                                       <img

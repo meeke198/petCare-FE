@@ -2,13 +2,6 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector} from "react-redux";
-// import { searchStart, updateQuery } from "../../redux/searchSlice";
-import { sentRequest } from "../../pages/ServicePackage";
-import {
-  // GET,
-  POST,
-  URL_FAVORITE_PRODUCT,
-} from "../../utilities/constantVariable";
 
 function discoutPrice(price, sale) {
   return price * (1 - sale / 100);
@@ -29,7 +22,6 @@ function ShopCard(props) {
   }
   const SEARCHING_API =
     process.env.REACT_APP_FETCH_API + `/products/search?query=${query}`;
-  const [arrayIdProductFavorite, setArrayIdProductFavorite] = useState([]);
   useEffect(() => {
       axios
         .get(`${SEARCHING_API}`, {
@@ -47,19 +39,9 @@ function ShopCard(props) {
   }, [
     props,
     shouldRender,
-    // arrayIdProductFavorite.length,
     query,
     isSearching,
   ]);
-
-  // const addInFavoriteListHandler = (props) => {
-  //   setArrayIdProductFavorite((prevState) => [...prevState, props]);
-  //   setShouldRender(!shouldRender);
-  //   const body = { userId, productId: props };
-    // const res = sentRequest(URL_FAVORITE_PRODUCT, POST, body, token);
-  // };
-  
-// console.log({ products });
   return (
     <>
       {products ? (
@@ -79,18 +61,6 @@ function ShopCard(props) {
                     }
                   >
                     <span>{markDtoResponse?.tag}</span>
-                  </div>
-                )}
-                {arrayIdProductFavorite?.includes(id) && (
-                  <div className={"cart-icon-list-favorite favorite-yes"}>
-                    <li>
-                      <a>
-                        <img
-                          src="/assets/images/icon/Icon-favorites3.svg"
-                          alt=""
-                        />
-                      </a>
-                    </li>
                   </div>
                 )}
 
@@ -113,14 +83,6 @@ function ShopCard(props) {
                     </Link>
                   </div>
                   <ul className="cart-icon-list">
-                    {/* <li onClick={addInFavoriteListHandler.bind(null, id)}>
-                      <a>
-                        <img
-                          src="/assets/images/icon/Icon-favorites3.svg"
-                          alt=""
-                        />
-                      </a>
-                    </li> */}
                   </ul>
                 </div>
                 <div className="collection-content text-center">

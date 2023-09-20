@@ -18,7 +18,7 @@ import Contact from "./pages/contact";
 import Profile from "./pages/profile";
 import Auth from "./hoc/Auth";
 import ChangPassword from "./pages/updatepassword";
-import FavoriteProduct from "./components/favoriteProduct/FavoriteProduct";
+// import FavoriteProduct from "./components/favoriteProduct/FavoriteProduct";
 import ProfileSection from "./components/userProfile/UserProfile";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import UpdateInfor from "./pages/updateimage";
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       // {path:'contact', element:<Contact/>},
       // {path:'profile', element:<Profile/>},
       {path:'updatePassword', element:<ChangPassword/>},
-      {path:'favorite-products',element:<FavoriteProduct/>},
+      // {path:'favorite-products',element:<FavoriteProduct/>},
       {path:'profile',element:<ProfileSection/>},
       {path:'update-image',element:<UpdateImage/>},
     ]},

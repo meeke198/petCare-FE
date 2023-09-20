@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useMemo, useState, useEffect} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 function ServiceNavigation(props) {
@@ -9,7 +9,10 @@ function ServiceNavigation(props) {
     const changePageHandler = (props) => {
         setCurrentPage(props);
     };
-
+   
+ useEffect(() => {
+   props.getCurrentPage(currentPage);
+ }, [currentPage, props]);
     const pageLinks = [];
     for (let i = 0; i < totalPages; i++) {
         const pageNumber = i ;
