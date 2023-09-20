@@ -2,13 +2,15 @@ import React, {useMemo, useState, useEffect} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 function ServiceNavigation(props) {
-    const [currentPage, setCurrentPage] = useState(props.currentPage);
-    const totalPages = props.totalPages;
-    props.getCurrentPage(currentPage);
+     const currentPage = props.currentPage;
+     const totalPages = props.totalPages;
+     console.log({currentPage});
+     console.log({ totalPages });
 
-    const changePageHandler = (props) => {
-        setCurrentPage(props);
-    };
+
+     const changePageHandler = (pageNumber) => {
+       props.setCurrentPage(pageNumber);
+     };
    
  useEffect(() => {
    props.getCurrentPage(currentPage);
@@ -30,18 +32,19 @@ function ServiceNavigation(props) {
     }
 
     const prevPageHandler = () => {
-        if(currentPage === 0){
-            return;
-        } else {
-            setCurrentPage(currentPage - 1);
-        }
-    }
+      if (currentPage === 0) {
+        return;
+      } else {
+        props.setCurrentPage(currentPage - 1);
+      }
+    };
+
     const nextPageHandler = () => {
-        if(currentPage === totalPages){
-            return;
-        } else {
-            setCurrentPage(currentPage + 1);
-        }
+      if (currentPage === totalPages) {
+        return;
+      } else {
+        props.setCurrentPage(currentPage + 1);
+      }
     };
 
     // Handel for page slide

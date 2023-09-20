@@ -71,7 +71,7 @@ export const ServicePackage = () => {
             const { servicePackages, totalPages } = await fetchData(packageName.name, pageSize, currentPage, sortedField,sortOrder, token);
             setData(servicePackages);
             setTotalPages(totalPages);
-            setPackageName(servicePackages[0]?.packageName);
+            // setPackageName(servicePackages[0]?.packageName);
             // console.log({ servicePackages });
         };
         fetchPage();
@@ -98,59 +98,68 @@ export const ServicePackage = () => {
 // console.log({ packageName });
 
     return (
-        <Layout>
-            <BreadcrumbService/>
-            <div className='service-package'>
-                <div className="service-package-wrapper">
-                    <div className="service-package-sidebar">
-                        <div className="service-package-check-box-item">
-                            <h5 className="service-package-widget-title">Order By</h5>
-                            <div className="service-package-checkbox-container">
-                                <label className="service-package-checkbox-label" >
-                                    Price
-                                    <input type="button" onClick={sortByPriceHandler} />
-                                    <span className="service-package-checkmark" />
-                                    {isSortedByPrice && <p className="service-package-checkmark--checked"></p>}
-                                </label>
-                                <label className="service-package-checkbox-label">
-                                    Center Name
-                                    <input type="checkbox" onClick={sortByCenterNameHandler} />
-                                    <span className="service-package-checkmark service-package-checkmark--hr" />
-                                    {isSortedByCenterName && <p className="service-package-checkmark--checked"></p>}
-                                </label>
-                                <label className="service-package-checkbox-label service-package-checkbox-label--space">
-                                    Asc
-                                    <input type="checkbox" onClick={sortAsDescHandler} />
-                                    <span className="service-package-checkmark" />
-                                    {!isSortedAsDesc && <p className="service-package-checkmark--checked"></p>}
-                                </label>
-                                <label className="service-package-checkbox-label" >
-                                    Desc
-                                    <input type="checkbox" onClick={sortAsDescHandler} />
-                                    <span className="service-package-checkmark" />
-                                    {isSortedAsDesc && <p className="service-package-checkmark--checked"></p>}
-                                </label>
-                                <label className="service-package-checkbox-label">
-                                    Bones &amp; Rawhide
-                                    <input type="checkbox" />
-                                    <span className="service-package-checkmark" />
-                                    {<p className="service-package-checkmark--checked"></p>}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="service-package-content">
-                        <OtherServiceSlide servicePackages={data} />
-                    </div>
+      <Layout>
+        <BreadcrumbService />
+        <div className="service-package">
+          <div className="service-package-wrapper">
+            <div className="service-package-sidebar">
+              <div className="service-package-check-box-item">
+                <h5 className="service-package-widget-title">Order By</h5>
+                <div className="service-package-checkbox-container">
+                  <label className="service-package-checkbox-label">
+                    Price
+                    <input type="button" onClick={sortByPriceHandler} />
+                    <span className="service-package-checkmark" />
+                    {isSortedByPrice && (
+                      <p className="service-package-checkmark--checked"></p>
+                    )}
+                  </label>
+                  <label className="service-package-checkbox-label">
+                    Center Name
+                    <input type="checkbox" onClick={sortByCenterNameHandler} />
+                    <span className="service-package-checkmark service-package-checkmark--hr" />
+                    {isSortedByCenterName && (
+                      <p className="service-package-checkmark--checked"></p>
+                    )}
+                  </label>
+                  <label className="service-package-checkbox-label service-package-checkbox-label--space">
+                    Asc
+                    <input type="checkbox" onClick={sortAsDescHandler} />
+                    <span className="service-package-checkmark" />
+                    {!isSortedAsDesc && (
+                      <p className="service-package-checkmark--checked"></p>
+                    )}
+                  </label>
+                  <label className="service-package-checkbox-label">
+                    Desc
+                    <input type="checkbox" onClick={sortAsDescHandler} />
+                    <span className="service-package-checkmark" />
+                    {isSortedAsDesc && (
+                      <p className="service-package-checkmark--checked"></p>
+                    )}
+                  </label>
+                  <label className="service-package-checkbox-label">
+                    Bones &amp; Rawhide
+                    <input type="checkbox" />
+                    <span className="service-package-checkmark" />
+                    {<p className="service-package-checkmark--checked"></p>}
+                  </label>
                 </div>
+              </div>
             </div>
-            <ServiceNavigation
-                currentPage={currentPage}
-                totalPages = {totalPages}
-                getCurrentPage={getCurrentPageHandler}
-            />
-        </Layout>
-    )
+            <div className="service-package-content">
+              <OtherServiceSlide servicePackages={data} />
+            </div>
+          </div>
+        </div>
+        <ServiceNavigation
+          currentPage={currentPage}
+          totalPages={totalPages}
+          getCurrentPage={getCurrentPageHandler}
+          setCurrentPage={setCurrentPage}
+        />
+      </Layout>
+    );
 }
 
 
