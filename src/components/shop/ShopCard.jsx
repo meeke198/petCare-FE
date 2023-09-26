@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 function discoutPrice(price, sale) {
   return price * (1 - sale / 100);
@@ -10,6 +10,7 @@ function discoutPrice(price, sale) {
 function ShopCard(props) {
   const [products, setProducts] = useState(props.products);
   const [shouldRender, setShouldRender] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const query = useSelector((state) => state.search.query);
   const isLogin = useSelector((state) => state.auth.login?.currentUser);
 
@@ -20,71 +21,12 @@ function ShopCard(props) {
     token = isLogin.token;
     userId = isLogin.userDtoResponse.id;
   }
-  const loading = () => {
-    return (
-      <div class="preloader">
-        <svg
-          class="cart"
-          role="img"
-          aria-label="Shopping cart line animation"
-          viewBox="0 0 128 128"
-          width="128px"
-          height="128px"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="8"
-          >
-            <g class="cart__track" stroke="hsla(0,10%,10%,0.1)">
-              <polyline points="4,4 21,4 26,22 124,22 112,64 35,64 39,80 106,80" />
-              <circle cx="43" cy="111" r="13" />
-              <circle cx="102" cy="111" r="13" />
-            </g>
-            <g class="cart__lines" stroke="currentColor">
-              <polyline
-                class="cart__top"
-                points="4,4 21,4 26,22 124,22 112,64 35,64 39,80 106,80"
-                stroke-dasharray="338 338"
-                stroke-dashoffset="-338"
-              />
-              <g class="cart__wheel1" transform="rotate(-90,43,111)">
-                <circle
-                  class="cart__wheel-stroke"
-                  cx="43"
-                  cy="111"
-                  r="13"
-                  stroke-dasharray="81.68 81.68"
-                  stroke-dashoffset="81.68"
-                />
-              </g>
-              <g class="cart__wheel2" transform="rotate(90,102,111)">
-                <circle
-                  class="cart__wheel-stroke"
-                  cx="102"
-                  cy="111"
-                  r="13"
-                  stroke-dasharray="81.68 81.68"
-                  stroke-dashoffset="81.68"
-                />
-              </g>
-            </g>
-          </g>
-        </svg>
-        <div class="preloader__text">
-          <p class="preloader__msg">Bringing you the goods…</p>
-          <p class="preloader__msg preloader__msg--last">
-            This is taking long. Something’s wrong.
-          </p>
-        </div>
-      </div>
-    );
-  }
   const SEARCHING_API =
     process.env.REACT_APP_FETCH_API + `/products/search?query=${query}`;
   useEffect(() => {
+    setIsLoading(true);
+    const delayedAction = () => {
+      console.log("Delayed action executed after 2000ms");
       axios
         .get(`${SEARCHING_API}`, {
           headers: {
@@ -94,19 +36,83 @@ function ShopCard(props) {
         .then((res) => {
           setProducts(res.data.content);
           props.setTotalPages(res.data.totalPages);
+          setIsLoading(false);
         })
         .catch((err) => {
           console.error(err);
         });
-  }, [
-    props,
-    shouldRender,
-    query,
-    isSearching,
-  ]);
+    };
+
+    // Set a timeout to execute the function after 2000 milliseconds (2 seconds)
+    const timeoutId1 = setTimeout(delayedAction, 2000);
+
+    // axios
+    //   .get(`${SEARCHING_API}`, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     setProducts(res.data.content);
+    //     props.setTotalPages(res.data.totalPages);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
+    return () => {
+      clearTimeout(timeoutId1);
+    };
+  }, [props, shouldRender, query, isSearching]);
+  console.log({ isLoading });
   return (
     <>
-      {products ? (
+      {isLoading ? (
+        <div className="loading-container">
+          <svg
+            className="tea"
+            width="100"
+            height="100"
+            viewBox="0 0 37 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M27.0819 17H3.02508C1.91076 17 1.01376 17.9059 1.0485 19.0197C1.15761 22.5177 1.49703 29.7374 2.5 34C4.07125 40.6778 7.18553 44.8868 8.44856 46.3845C8.79051 46.79 9.29799 47 9.82843 47H20.0218C20.639 47 21.2193 46.7159 21.5659 46.2052C22.6765 44.5687 25.2312 40.4282 27.5 34C28.9757 29.8188 29.084 22.4043 29.0441 18.9156C29.0319 17.8436 28.1539 17 27.0819 17Z"
+              stroke="var(--secondary)"
+              stroke-width="2"
+            ></path>
+            <path
+              d="M29 23.5C29 23.5 34.5 20.5 35.5 25.4999C36.0986 28.4926 34.2033 31.5383 32 32.8713C29.4555 34.4108 28 34 28 34"
+              stroke="var(--secondary)"
+              stroke-width="2"
+            ></path>
+            <path
+              id="teabag"
+              fill="var(--secondary)"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M16 25V17H14V25H12C10.3431 25 9 26.3431 9 28V34C9 35.6569 10.3431 37 12 37H18C19.6569 37 21 35.6569 21 34V28C21 26.3431 19.6569 25 18 25H16ZM11 28C11 27.4477 11.4477 27 12 27H18C18.5523 27 19 27.4477 19 28V34C19 34.5523 18.5523 35 18 35H12C11.4477 35 11 34.5523 11 34V28Z"
+            ></path>
+            <path
+              id="steamL"
+              d="M17 1C17 1 17 4.5 14 6.5C11 8.5 11 12 11 12"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke="var(--secondary)"
+            ></path>
+            <path
+              id="steamR"
+              d="M21 6C21 6 21 8.22727 19 9.5C17 10.7727 17 13 17 13"
+              stroke="var(--secondary)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+          <h3 style={{ color: "#7C81AD" }}>Loading....</h3>
+        </div>
+      ) : products ? (
         products?.map((item) => {
           const { id, name, image, price, sale, markDtoResponse } = item;
           return (
@@ -140,18 +146,13 @@ function ShopCard(props) {
                     <div className="plus-icon">
                       <i className="bi bi-plus" />
                     </div>
-                    <Link to={`/shop-details/${id}`}>
-                     View Details
-                    </Link>
+                    <Link to={`/shop-details/${id}`}>View Details</Link>
                   </div>
-                  <ul className="cart-icon-list">
-                  </ul>
+                  <ul className="cart-icon-list"></ul>
                 </div>
                 <div className="collection-content text-center">
                   <h4>
-                    <Link to={`/shop-details/${id}`}>
-                      {name}
-                    </Link>
+                    <Link to={`/shop-details/${id}`}>{name}</Link>
                   </h4>
                   <div className="price">
                     <h6>${discoutPrice(price, sale)}</h6>

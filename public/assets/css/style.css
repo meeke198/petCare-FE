@@ -7795,6 +7795,69 @@ footer.style2 .social-area ul li:hover a i {
   /*background-color: var(--title-color2);*/
   background-color: #fd2020;
 }
+
+.loading-container {
+  min-height: 30vh;
+  display: grid;
+  place-items: center;
+}
+
+svg.tea {
+  --secondary: #33406f;
+  /*transform: scale(2);*/
+}
+
+svg.tea #teabag {
+  transform-origin: top center;
+  transform: rotate(3deg);
+  animation: swing 2s infinite;
+}
+
+svg.tea #steamL {
+  stroke-dasharray: 13;
+  stroke-dashoffset: 13;
+  animation: steamLarge 2s infinite;
+}
+
+svg.tea #steamR {
+  stroke-dasharray: 9;
+  stroke-dashoffset: 9;
+  animation: steamSmall 2s infinite;
+}
+
+@keyframes swing {
+  50% {
+    transform: rotate(-3deg);
+  }
+}
+
+@keyframes steamLarge {
+  0% {
+    stroke-dashoffset: 13;
+    opacity: 0.6;
+  }
+  100% {
+    stroke-dashoffset: 39;
+    opacity: 0;
+  }
+}
+
+@keyframes steamSmall {
+  10% {
+    stroke-dashoffset: 9;
+    opacity: 0.6;
+  }
+  80% {
+    stroke-dashoffset: 27;
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: 27;
+    opacity: 0;
+  }
+}
+
+
 /*///////////////////////////////////////////////////////////*/
 .cart-icon-list-favorite {
   margin: 0;
