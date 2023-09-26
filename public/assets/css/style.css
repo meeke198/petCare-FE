@@ -1484,9 +1484,9 @@ header.style-1 .nav-right ul li a {
   color: red;
 }
 
-header.style-1 .nav-right ul li a svg {
+/* header.style-1 .nav-right ul li a svg {
   fill: var(--white);
-}
+} */
 header.style-1 .nav-right ul li a:hover {
   border-color: #f46f30;
 }
@@ -1550,6 +1550,7 @@ header.style-1 .nav-right ul .search-btn:hover .nav__search-form {
   visibility: visible;
   top: calc(100% + 7px);
 }
+
 header.style-1 .nav-right .mobile-menu-btn {
   display: none;
   visibility: hidden;

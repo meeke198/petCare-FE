@@ -1521,9 +1521,9 @@ header.style-1 {
     }
   }
   .nav-right {
-    gap: 24px;
-    @include fifteen-down-device() {
-      gap: 15px;
+    gap: 70px;
+    @include xxl-device() {
+      gap: 50px;
     }
     ul {
       margin: 0;
@@ -1532,7 +1532,10 @@ header.style-1 {
       align-items: center;
       list-style: none;
       gap: 24px;
-      @include fifteen-down-device() {
+      @include xxl-device() {
+        gap: 15px;
+      }
+      @include xxl-down-device() {
         gap: 15px;
       }
       @include md-down-device() {
@@ -1547,102 +1550,116 @@ header.style-1 {
           line-height: 1;
           border-radius: 50%;
           border: 1px solid;
-          border-color: #f46f30;
+          border-color: var(--primary-color3);
           display: flex;
           align-items: center;
           justify-content: center;
-          background-color: transparent;
+          background-color: var(--white);
           transition: 0.35s;
-          position: relative;
-          &::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 100%;
-            background: var(--gradient-color);
-            opacity: 0;
-            transition: 0.35s;
-            border-radius: 50%;
-            z-index: -1;
-          }
           svg {
-            fill: var(--white);
+            fill: var(--primary-color3);
+            transition: 0.35s;
           }
           &:hover {
-            border-color: #f46f30;
-            &::after {
-              opacity: 1;
-            }
-          }
-        }
-      }
-      .search-btn {
-        padding: 20px 0;
-        cursor: pointer;
-        .nav__search-form {
-          position: absolute;
-          top: calc(100% + 15px);
-          right: -32px;
-          width: 300px;
-          display: flex;
-          align-items: center;
-          background-color: var(--title-color1);
-          border: 1px solid #000;
-          padding: 15px;
-          transition: 0.35s;
-          opacity: 0;
-          visibility: hidden;
-          &::after {
-            content: "";
-            width: 0px;
-            height: 0px;
-            top: -8px;
-            right: 40px;
-            position: absolute;
-            border-right: 8px solid transparent;
-            border-left: 8px solid transparent;
-            border-bottom: 8px solid var(--title-color1);
-            z-index: -1;
-          }
-          input {
-            border: none;
-            background: none;
-            outline: none;
-            width: 100%;
-            padding: 0 6px;
-            color: var(--white);
-            font-family: var(--font-cabin);
-            font-weight: 400;
-          }
-          button {
-            border: none;
-            background: none;
-            color: rgba(var(--heading-color), 1);
-            padding: 0;
-            width: 20px;
-            height: 20px;
-            line-height: 1;
-            padding-right: 6px;
+            background: var(--primary-color3);
             svg {
               fill: var(--white);
             }
           }
         }
-
-        &:hover {
+        &.search-btn {
+          padding: 20px 0;
+          cursor: pointer;
           .nav__search-form {
-            opacity: 1;
-            visibility: visible;
-            top: calc(100% + 7px);
+            position: absolute;
+            top: calc(100% + 15px);
+            right: -32px;
+            width: 300px;
+            display: flex;
+            align-items: center;
+            background-color: var(--title-color1);
+            border: 1px solid #000;
+            padding: 15px;
+            transition: 0.35s;
+            opacity: 0;
+            visibility: hidden;
+            &::after {
+              content: "";
+              width: 0px;
+              height: 0px;
+              top: -8px;
+              right: 40px;
+              position: absolute;
+              border-right: 8px solid transparent;
+              border-left: 8px solid transparent;
+              border-bottom: 8px solid var(--title-color1);
+              z-index: -1;
+            }
+            input {
+              border: none;
+              background: none;
+              outline: none;
+              width: 100%;
+              padding: 0 6px;
+              color: var(--white);
+              font-family: var(--font-cabin);
+              font-weight: 400;
+            }
+            button {
+              border: none;
+              background: none;
+              color: rgba(var(--heading-color), 1);
+              padding: 0;
+              width: 20px;
+              height: 20px;
+              line-height: 1;
+              padding-right: 6px;
+              svg {
+                fill: var(--white);
+              }
+            }
+          }
+
+          &:hover {
+            .nav__search-form {
+              opacity: 1;
+              visibility: visible;
+              top: calc(100% + 7px);
+            }
+          }
+        }
+      }
+    }
+    .hotline-info {
+      @include xxl-device() {
+        display: none;
+        visibility: hidden;
+      }
+      @include xxl-down-device() {
+        display: none;
+        visibility: hidden;
+      }
+      span {
+        @include font(0.875rem, 500, var(--primary-color2));
+        font-family: var(--font-cabin);
+        display: inline-block;
+      }
+      h6 {
+        margin: 0;
+        a {
+          @include font(1rem, 600, var(--title-color1));
+          font-family: var(--font-dosis);
+          letter-spacing: 0.03em;
+          transition: 0.35s;
+          &:hover {
+            color: var(--primary-color2);
           }
         }
       }
     }
     .mobile-menu-btn {
       i {
-        color: var(--white);
+        color: var(--title-color1);
         font-size: 25px;
       }
       display: none;
