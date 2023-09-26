@@ -98,7 +98,7 @@ export const ServicePackage = () => {
         setSortedAsDesc(!isSortedAsDesc)
     }
 // console.log({ packageDefault });
-// console.log({ packageName });
+console.log({ data });
 
     return (
       <Layout>
