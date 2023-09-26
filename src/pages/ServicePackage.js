@@ -9,7 +9,10 @@ import {useSelector} from "react-redux";
 
 const fetchData = async (packageName, pageSize, currentPage, sortedField = "", sortOrder, token = "") => {
 
-    const URL = `http://localhost:8080/api/package-details/search/${packageName}?size=${pageSize}&page=${currentPage}&sort=${sortedField}${sortOrder === "asc" ? ",asc" : ",desc"}`;
+    const URL = `https://pet-world-a2c2979cf3b7.herokuapp.com/api/package-details/search/${packageName}?size=${pageSize}&page=${currentPage}&sort=${sortedField}${
+      sortOrder === "asc" ? ",asc" : ",desc"
+    }`;
+    // const URL = `http://localhost:8080/api/package-details/search/${packageName}?size=${pageSize}&page=${currentPage}&sort=${sortedField}${sortOrder === "asc" ? ",asc" : ",desc"}`;
     
     const headers = {
         'Content-Type': 'application/json',
