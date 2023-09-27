@@ -88,8 +88,6 @@ export const ServicePackage = () => {
                }
         };
         fetchPage();
-
-
     }, [currentPage, pageSize, isSortedByPrice, isSortedAsDesc]);
 
     const getCurrentPageHandler = (currentPage) => {
