@@ -26,11 +26,14 @@
   overflow: hidden;
   list-style: none;
   padding: 0;
+  width: 100vw;
   /* Fix of Webkit flickering */
   z-index: 1;
 }
 .swiper-vertical > .swiper-wrapper {
   flex-direction: column;
+  width: 100%;
+
 }
 .swiper-wrapper {
   position: relative;
@@ -38,6 +41,7 @@
   height: 100%;
   z-index: 1;
   display: flex;
+  justify-content: center;
   transition-property: transform;
   box-sizing: content-box;
 }

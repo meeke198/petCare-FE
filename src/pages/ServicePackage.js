@@ -12,7 +12,7 @@ const fetchData = async (packageName, pageSize, currentPage, sortedField = "", s
     const URL = `https://pet-world-a2c2979cf3b7.herokuapp.com/api/package-details/search/${packageName}?size=${pageSize}&page=${currentPage}&sort=${sortedField}${
       sortOrder === "asc" ? ",asc" : ",desc"
     }`;
-    // const URL = `http://localhost:8080/api/package-details/search/${packageName}?size=${pageSize}&page=${currentPage}&sort=${sortedField}${sortOrder === "asc" ? ",asc" : ",desc"}`;
+   
     
     const headers = {
         'Content-Type': 'application/json',
@@ -71,11 +71,21 @@ export const ServicePackage = () => {
             sortedField = 'center';
         }
         const fetchPage = async () => {
-            const { servicePackages, totalPages } = await fetchData(packageName.name, pageSize, currentPage, sortedField,sortOrder, token);
-            setData(servicePackages);
-            setTotalPages(totalPages);
-            // setPackageName(servicePackages[0]?.packageName);
-            // console.log({ servicePackages });
+               try {
+                 const { servicePackages, totalPages } = await fetchData(
+                   packageName.name,
+                   pageSize,
+                   currentPage,
+                   sortedField,
+                   sortOrder,
+                   token
+                 );
+                 setData(servicePackages);
+                 setTotalPages(totalPages);
+               } catch (error) {
+                 console.error("Error:", error);
+                 // Handle the error, e.g., display an error message
+               }
         };
         fetchPage();
 

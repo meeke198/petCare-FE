@@ -9702,12 +9702,13 @@ svg.tea #steamR {
 }
 
 .paginations-area .pagination {
+  width: auto;
   gap: 20px;
 }
 .paginations-area .pagination .page-item .page-link {
   padding: 0;
   height: 40px;
-  width: 40px;
+  width: 50px;
   line-height: 40px;
   display: flex;
   align-items: center;
