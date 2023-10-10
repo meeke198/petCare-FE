@@ -6,19 +6,16 @@ const OtherServiceSlide = (props) => {
 
   useEffect(() => {
     const delayedAction = () => {
-      console.log("Delayed action executed after 2000ms");
       setServicePackages(props.servicePackages);
       setIsLoading(false);
     };
 
-    const timeoutId = setTimeout(delayedAction, 2000);
+    const timeoutId = setTimeout(delayedAction, 500);
 
     return () => {
       clearTimeout(timeoutId);
     };
   }, [props.servicePackages]);
-
-  console.log({ servicePackages });
 
   return (
     <>
