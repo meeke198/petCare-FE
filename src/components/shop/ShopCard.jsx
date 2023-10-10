@@ -44,7 +44,7 @@ function ShopCard(props) {
     };
 
     // Set a timeout to execute the function after 2000 milliseconds (2 seconds)
-    const timeoutId1 = setTimeout(delayedAction, 2000);
+    const timeoutId1 = setTimeout(delayedAction, 500);
 
     // axios
     //   .get(`${SEARCHING_API}`, {
