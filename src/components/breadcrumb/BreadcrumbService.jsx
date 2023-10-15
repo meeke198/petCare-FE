@@ -3,7 +3,6 @@ import React from "react";
 
 function BreadcrumbService({ pageName = "Page Name", pageTitle = "Page Title" }) {
     const packages = useParams();
-    console.log({ packages });
     return (
         <div className="inner-page-banner">
             <div className="breadcrumb-vec-btm">

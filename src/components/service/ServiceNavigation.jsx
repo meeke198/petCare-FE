@@ -4,10 +4,7 @@ import {Swiper, SwiperSlide} from "swiper/react";
 function ServiceNavigation(props) {
      const currentPage = props.currentPage;
      const totalPages = props.totalPages;
-     console.log({currentPage});
-     console.log({ totalPages });
-
-
+     
      const changePageHandler = (pageNumber) => {
        props.setCurrentPage(pageNumber);
      };

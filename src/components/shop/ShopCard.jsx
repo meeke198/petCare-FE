@@ -26,7 +26,6 @@ function ShopCard(props) {
   useEffect(() => {
     setIsLoading(true);
     const delayedAction = () => {
-      console.log("Delayed action executed after 2000ms");
       axios
         .get(`${SEARCHING_API}`, {
           headers: {
@@ -63,7 +62,6 @@ function ShopCard(props) {
       clearTimeout(timeoutId1);
     };
   }, [props, shouldRender, query, isSearching]);
-  console.log({ isLoading });
   return (
     <>
       {isLoading ? (

@@ -29,10 +29,7 @@ const fetchData = async (packageName, pageSize, currentPage, sortedField = "", s
 
     const response = await fetch(URL, options);
     const data = await response.json();
-     console.log({ data });
     const servicePackages = data.content;
-
-    console.log({servicePackages});
     const totalPages = data.totalPages;
     return { servicePackages, totalPages };
 };
@@ -105,8 +102,6 @@ export const ServicePackage = () => {
     const sortAsDescHandler = () => {
         setSortedAsDesc(!isSortedAsDesc)
     }
-// console.log({ packageDefault });
-console.log({ data });
 
     return (
       <Layout>
