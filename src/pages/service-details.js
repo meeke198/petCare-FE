@@ -157,9 +157,9 @@ function ServiceDetails(props) {
           detail: `Add successfully`,
           life: 1000,
         });
-        setTimeout(() => {
+        // setTimeout(() => {
           navigation("/shop");
-        }, 1000);
+        // }, 1000);
       } catch (error) {
         toast.current.show({
           severity: "error",

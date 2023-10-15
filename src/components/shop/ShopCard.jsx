@@ -25,7 +25,7 @@ function ShopCard(props) {
     process.env.REACT_APP_FETCH_API + `/products/search?query=${query}`;
   useEffect(() => {
     setIsLoading(true);
-    const delayedAction = () => {
+    // const delayedAction = () => {
       axios
         .get(`${SEARCHING_API}`, {
           headers: {
@@ -40,10 +40,10 @@ function ShopCard(props) {
         .catch((err) => {
           console.error(err);
         });
-    };
+    // };
 
     // Set a timeout to execute the function after 2000 milliseconds (2 seconds)
-    const timeoutId1 = setTimeout(delayedAction, 500);
+    // const timeoutId1 = setTimeout(delayedAction, 500);
 
     // axios
     //   .get(`${SEARCHING_API}`, {
@@ -58,9 +58,9 @@ function ShopCard(props) {
     //   .catch((err) => {
     //     console.error(err);
     //   });
-    return () => {
-      clearTimeout(timeoutId1);
-    };
+    // return () => {
+    //   clearTimeout(timeoutId1);
+    // };
   }, [props, shouldRender, query, isSearching]);
   return (
     <>

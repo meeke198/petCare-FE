@@ -129,9 +129,9 @@ function ProductShow(props) {
           detail: `Add ${product.name} successfully`,
           life: 1000,
         });
-        setTimeout(() => {
+        // setTimeout(() => {
           navigation("/shop");
-        }, 1000);
+        // }, 1000);
       } catch (error) {
         props.toast?.current.show({
           severity: "error",
